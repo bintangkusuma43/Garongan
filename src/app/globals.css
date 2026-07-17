@@ -1,0 +1,216 @@
+@import "tailwindcss";
+@import "leaflet/dist/leaflet.css";
+
+html, body {
+  width: 100%;
+  min-width: 100%;
+}
+
+html {
+  overflow-y: scroll;
+  scrollbar-gutter: stable;
+}
+
+:root {
+  --background: #FAFAF9;      /* Warm White */
+  --foreground: #1F2937;      /* Text Primary */
+  
+  --primary: #14532D;         /* Emerald Green */
+  --primary-hover: #166534;   /* Forest Green */
+  --primary-light: #84CC16;   /* Olive Green Accent */
+  --primary-soft: #F5F7F2;    /* Soft Background */
+  
+  --secondary: #166534;       /* Forest Green */
+  --accent: #84CC16;          /* Olive Green */
+  --muted: #6B7280;           /* Text Secondary */
+  --border: #e5e7eb;          /* Tailwind standard border */
+  --highlight: #FBBF24;       /* Amber Gold */
+  
+  --card: #ffffff;
+  --card-foreground: #1F2937;
+  
+  --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
+  --font-heading: var(--font-poppins), sans-serif;
+}
+
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-light: var(--color-primary-light);
+  --color-primary-soft: var(--primary-soft);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-highlight: var(--highlight);
+  --font-sans: var(--font-sans);
+  --font-heading: var(--font-heading);
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+}
+
+/* Glassmorphism Preset */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.glass-effect-dark {
+  background: rgba(20, 83, 45, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Active Highlight Indicator */
+.active-link-indicator::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 15%;
+  right: 15%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary-light), var(--primary));
+  border-radius: 9999px;
+  box-shadow: 0 0 12px rgba(132, 204, 22, 0.8);
+}
+
+/* Modern Hover Lifting Effects & Glowing Shadows */
+.hover-lift {
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.hover-lift:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 35px -15px rgba(20, 83, 45, 0.15);
+}
+
+.hover-glow {
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.hover-glow:hover {
+  box-shadow: 0 0 25px rgba(132, 204, 22, 0.35);
+  border-color: rgba(132, 204, 22, 0.4);
+}
+
+.hover-scale-glow {
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.hover-scale-glow:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 15px 30px -10px rgba(20, 83, 45, 0.12), 0 0 15px rgba(132, 204, 22, 0.2);
+  border-color: rgba(132, 204, 22, 0.3);
+}
+
+/* Gradient Text Utilities */
+.text-gradient-emerald-lime {
+  background: linear-gradient(135deg, #14532D 0%, #166534 50%, #84CC16 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-lime-white {
+  background: linear-gradient(135deg, #84CC16 0%, #ffffff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Custom modern scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border: 3px solid var(--background);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--secondary);
+}
+
+/* Leaflet Map overrides for modern styling */
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  border-radius: 1.5rem;
+}
+.leaflet-bar {
+  border: none !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+}
+.leaflet-bar a {
+  border-bottom: 1px solid var(--border) !important;
+  color: var(--primary) !important;
+}
+.leaflet-bar a:hover {
+  background-color: var(--primary-soft) !important;
+}
+
+/* Fade-in Animation utilities */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes pulseRing {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(132, 204, 22, 0.5);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 10px rgba(132, 204, 22, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(132, 204, 22, 0);
+  }
+}
+.animate-pulse-ring {
+  animation: pulseRing 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
