@@ -125,11 +125,9 @@ export default async function HomePage() {
   }
 
   const heroImages = [
-    '/images/jakagarong/jakagarong-1.webp',
-    '/images/jakagarong/jakagarong-2.webp',
-    '/images/jakagarong/jakagarong-3.webp',
-    '/images/jakagarong/jakagarong-4.webp',
-    '/images/jakagarong/jakagarong-5.webp'
+    '/images/dashboard/dashboard_1.webp',
+    '/images/dashboard/dashboard_2.webp',
+    '/images/dashboard/dashboard_3.webp'
   ];
 
   return (
