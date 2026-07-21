@@ -171,7 +171,7 @@ export default async function HomePage() {
                 href="/mitigasi"
                 className="flex items-center justify-center px-8 py-4 bg-white/10 hover:bg-white/20 border border-white/25 text-white rounded-2xl font-extrabold backdrop-blur-md transition-all hover:scale-105 hover:shadow-[0_0_25px_rgba(255,255,255,0.2)] transform hover:-translate-y-1 duration-300 shadow-sm"
               >
-                Lihat Jalur Evakuasi
+                Lihat Peta Mitigasi
               </Link>
             </div>
 
@@ -632,7 +632,7 @@ export default async function HomePage() {
                   href="/mitigasi"
                   className="inline-flex items-center space-x-2 px-7 py-4 bg-gradient-to-r from-[#84CC16] to-[#65a30d] hover:shadow-[0_0_25px_rgba(132,204,22,0.45)] hover:scale-105 text-[#14532D] rounded-2xl font-extrabold text-sm transition-all transform hover:-translate-y-0.5 duration-300 shadow-md"
                 >
-                  <span>Buka Peta Evakuasi</span>
+                  <span>Buka Peta Mitigasi</span>
                   <ArrowRight className="h-4 w-4" />
                 </Link>
               </div>
@@ -650,15 +650,15 @@ export default async function HomePage() {
                     <div className="bg-[#84CC16]/20 border border-[#84CC16]/40 text-[#84CC16] p-4.5 rounded-full w-fit mx-auto animate-pulse-ring">
                       <MapPin className="h-8 w-8" />
                     </div>
-                    <h3 className="text-lg font-extrabold text-white tracking-wide font-heading">Peta Jalur Evakuasi Interaktif</h3>
+                    <h3 className="text-lg font-extrabold text-white tracking-wide font-heading">Peta Mitigasi & Kawasan Rawan Bencana</h3>
                     <p className="text-xs text-white/80 max-w-sm mx-auto leading-relaxed font-sans font-semibold">
-                      Sistem terintegrasi Leaflet.js yang menunjukkan letak pos ronda, posko darurat bencana, dan rute pengungsian darurat warga.
+                      Akses peta tata ruang rawan bencana erupsi Gunung Merapi serta rute jalur evakuasi keselamatan warga RT 01 Garongan.
                     </p>
                     <Link
                       href="/mitigasi"
                       className="inline-block px-5.5 py-3.5 bg-[#84CC16] text-[#14532D] hover:bg-[#84CC16]/95 hover:shadow-[0_0_15px_rgba(132,204,22,0.3)] hover:scale-105 rounded-xl text-xs font-extrabold transition-all shadow"
                     >
-                      Buka Peta Leaflet
+                      Buka Peta Mitigasi
                     </Link>
                   </div>
                 </div>

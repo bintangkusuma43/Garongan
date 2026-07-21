@@ -46,7 +46,7 @@ export default function Footer() {
                 <Link href="/galeri" className="hover:text-[#84CC16] hover:underline transition-all">Galeri Kegiatan</Link>
               </li>
               <li>
-                <Link href="/mitigasi" className="hover:text-[#84CC16] hover:underline transition-all">Jalur Evakuasi</Link>
+                <Link href="/mitigasi" className="hover:text-[#84CC16] hover:underline transition-all">Peta Mitigasi</Link>
               </li>
               <li>
                 <Link href="/lokasi" className="hover:text-[#84CC16] hover:underline transition-all">Lokasi</Link>

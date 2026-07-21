@@ -11,7 +11,7 @@ const navLinks = [
   { href: '/profil', label: 'Profil' },
   { href: '/potensi', label: 'Potensi Dusun' },
   { href: '/galeri', label: 'Galeri Kegiatan' },
-  { href: '/mitigasi', label: 'Jalur Evakuasi' },
+  { href: '/mitigasi', label: 'Peta Mitigasi' },
   { href: '/lokasi', label: 'Lokasi' },
 ];
 
