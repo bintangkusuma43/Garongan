@@ -341,29 +341,7 @@ export default async function PotensiPage(props: { searchParams: Promise<SearchP
               </div>
             )}
 
-            {/* Full-width Responsive Photo Gallery */}
-            <div className="mt-16 pt-12 border-t border-slate-200/80 space-y-8">
-              <div className="text-center max-w-xl mx-auto space-y-2">
-                <h3 className="text-2xl font-extrabold text-[#14532D] font-heading">Galeri Dokumentasi Jaka Garong</h3>
-                <p className="text-slate-500 text-sm leading-relaxed font-sans font-medium">
-                  Menampilkan landscape bumi perkemahan, wahana outbound, pendopo joglo, serta petualangan susur Sungai Sempor yang asri.
-                </p>
-              </div>
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-                {Array.from({ length: 10 }).map((_, index) => {
-                  const photoIndex = index + 4;
-                  return (
-                    <div key={photoIndex} className="group relative rounded-2xl overflow-hidden border border-slate-200/60 aspect-[4/3] bg-slate-100 hover-scale-glow transition-all duration-300 shadow-sm">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={`/images/jakagarong/jakagarong-${photoIndex}.webp`} alt={`Landscape Jaka Garong ${photoIndex}`} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                      <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                        <Sparkles className="h-6 w-6 text-[#84CC16] animate-pulse" />
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
+
           </div>
         )}
 
