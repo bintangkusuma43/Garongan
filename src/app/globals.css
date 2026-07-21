@@ -94,11 +94,11 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow: 0 0 12px rgba(132, 204, 22, 0.8);
 }
 
-/* Modern Hover Lifting Effects & Glowing Shadows */
+/* Modern Hover Lifting Effects & Glowing Shadows (Desktop Hover & Mobile Active/Touch Support) */
 .hover-lift {
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.hover-lift:hover {
+.hover-lift:hover, .hover-lift:active {
   transform: translateY(-6px);
   box-shadow: 0 20px 35px -15px rgba(20, 83, 45, 0.15);
 }
@@ -106,7 +106,7 @@ h1, h2, h3, h4, h5, h6 {
 .hover-glow {
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.hover-glow:hover {
+.hover-glow:hover, .hover-glow:active {
   box-shadow: 0 0 25px rgba(132, 204, 22, 0.35);
   border-color: rgba(132, 204, 22, 0.4);
 }
@@ -114,7 +114,7 @@ h1, h2, h3, h4, h5, h6 {
 .hover-scale-glow {
   transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.hover-scale-glow:hover {
+.hover-scale-glow:hover, .hover-scale-glow:active {
   transform: translateY(-4px) scale(1.02);
   box-shadow: 0 15px 30px -10px rgba(20, 83, 45, 0.12), 0 0 15px rgba(132, 204, 22, 0.2);
   border-color: rgba(132, 204, 22, 0.3);

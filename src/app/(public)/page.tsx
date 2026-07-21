@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { ArrowRight, Leaf, ShieldAlert, MapPin, Calendar, Compass, Users, Award, Tent, HelpCircle, GitBranch, BarChart3 } from 'lucide-react';
 import { createClient } from '@/lib/supabase/server';
 import { HeroBackground } from '@/components/HeroBackground';
+import { ScrollReveal } from '@/components/ScrollReveal';
 
 // Fallback mock data in case Supabase is empty or not yet connected
 const mockKegiatan = [
@@ -200,7 +201,8 @@ export default async function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-28">
           
           {/* Top Row: Foto Dusun | Informasi Profil */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+          <ScrollReveal>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
             {/* Left: Foto Dusun */}
             <div className="lg:col-span-5 relative">
               <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl border-4 border-white ring-1 ring-slate-200/40 bg-slate-100 hover-scale-glow duration-500">
@@ -249,10 +251,12 @@ export default async function HomePage() {
                 </div>
               </div>
             </div>
+          </ScrollReveal>
           </div>
 
           {/* Sub-row additions: Charts, Timeline & Organization Cards */}
-          <div className="pt-16 border-t border-slate-100 space-y-20">
+          <ScrollReveal delay={150}>
+            <div className="pt-16 border-t border-slate-100 space-y-20">
             
             {/* 1. Demografi Charts */}
             <div className="space-y-6">
@@ -400,8 +404,8 @@ export default async function HomePage() {
                 ))}
               </div>
             </div>
-
-          </div>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
@@ -422,7 +426,8 @@ export default async function HomePage() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+          <ScrollReveal>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
             
             {/* KWT Tourism Style Card */}
             <div className="bg-white rounded-3xl border border-slate-200/60 overflow-hidden flex flex-col group hover-scale-glow transition-all duration-300 shadow-sm">
@@ -500,7 +505,8 @@ export default async function HomePage() {
               </div>
             </div>
 
-          </div>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
@@ -528,7 +534,8 @@ export default async function HomePage() {
           </div>
 
           {/* Masonry-like responsive grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <ScrollReveal>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {latestKegiatan.map((keg: any) => (
               <Link 
                 key={keg.id} 
@@ -579,7 +586,8 @@ export default async function HomePage() {
                 </div>
               </Link>
             ))}
-          </div>
+            </div>
+          </ScrollReveal>
 
         </div>
       </section>
@@ -590,7 +598,8 @@ export default async function HomePage() {
         <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#ffffff_1.5px,transparent_1.5px)] [background-size:24px_24px]" />
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+          <ScrollReveal>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
             
             {/* Mitigation Info Column */}
             <div className="lg:col-span-5 space-y-6">
@@ -662,14 +671,16 @@ export default async function HomePage() {
               </div>
             </div>
 
-          </div>
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
       {/* 6. Lokasi Section */}
       <section className="py-28 bg-[#FAFAF9]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+          <ScrollReveal>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
             
             {/* Info */}
             <div className="lg:col-span-6 space-y-6">
@@ -726,8 +737,9 @@ export default async function HomePage() {
                 />
               </div>
             </div>
+            </div>
+          </ScrollReveal>
 
-          </div>
         </div>
       </section>
 
