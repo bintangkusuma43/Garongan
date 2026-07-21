@@ -12,7 +12,6 @@ export default async function AdminDashboardPage() {
   let stats = {
     kegiatan: 5, // fallback defaults
     potensi: 2,
-    peta: 3,
   };
   
   let isSupabaseConfigured = true;
@@ -21,15 +20,13 @@ export default async function AdminDashboardPage() {
     const supabase = await createClient();
     
     // Fetch counts using Supabase API
-    const [kegRes, potRes, mapRes] = await Promise.all([
+    const [kegRes, potRes] = await Promise.all([
       supabase.from('kegiatan').select('*', { count: 'exact', head: true }),
       supabase.from('potensi_dusun').select('*', { count: 'exact', head: true }),
-      supabase.from('jalur_evakuasi').select('*', { count: 'exact', head: true }),
     ]);
 
     if (!kegRes.error && kegRes.count !== null) stats.kegiatan = kegRes.count;
     if (!potRes.error && potRes.count !== null) stats.potensi = potRes.count;
-    if (!mapRes.error && mapRes.count !== null) stats.peta = mapRes.count;
   } catch (err) {
     console.warn('Could not load statistics from Supabase database. Using fallback counts.');
     isSupabaseConfigured = false;
@@ -54,7 +51,7 @@ export default async function AdminDashboardPage() {
       </div>
 
       {/* Grid: Statistics */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         
         {/* Stat: Kegiatan */}
         <div className="bg-white p-6 rounded-2xl border border-border shadow-sm flex items-center space-x-4">
@@ -75,17 +72,6 @@ export default async function AdminDashboardPage() {
           <div>
             <span className="text-[10px] text-muted font-bold uppercase tracking-wider block">Sektor Potensi</span>
             <span className="text-2xl font-extrabold text-primary block mt-1">{stats.potensi}</span>
-          </div>
-        </div>
-
-        {/* Stat: Peta Evakuasi */}
-        <div className="bg-white p-6 rounded-2xl border border-border shadow-sm flex items-center space-x-4">
-          <div className="bg-red-50 text-red-600 p-4 rounded-xl">
-            <MapPin className="h-6 w-6" />
-          </div>
-          <div>
-            <span className="text-[10px] text-muted font-bold uppercase tracking-wider block">Titik Evakuasi</span>
-            <span className="text-2xl font-extrabold text-primary block mt-1">{stats.peta}</span>
           </div>
         </div>
 
@@ -121,17 +107,6 @@ export default async function AdminDashboardPage() {
               <div className="flex items-center space-x-3 text-xs font-bold text-primary">
                 <Compass className="h-4 w-4 text-amber-600" />
                 <span>Ubah Data Wisata & Tani</span>
-              </div>
-              <ArrowRight className="h-4 w-4 text-muted group-hover:text-primary transition-colors" />
-            </Link>
-
-            <Link
-              href="/admin/peta-evakuasi"
-              className="flex items-center justify-between p-4 rounded-xl border border-border hover:border-primary/20 hover:bg-slate-50 transition-all group"
-            >
-              <div className="flex items-center space-x-3 text-xs font-bold text-primary">
-                <MapPin className="h-4 w-4 text-red-600" />
-                <span>Ubah Titik Jalur Evakuasi</span>
               </div>
               <ArrowRight className="h-4 w-4 text-muted group-hover:text-primary transition-colors" />
             </Link>

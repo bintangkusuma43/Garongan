@@ -23,7 +23,6 @@ const sidebarLinks = [
   { href: '/admin/dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { href: '/admin/kegiatan', label: 'Data Kegiatan', icon: Calendar },
   { href: '/admin/potensi', label: 'Data Potensi', icon: Compass },
-  { href: '/admin/peta-evakuasi', label: 'Jalur Evakuasi', icon: MapPin },
   { href: '/admin/profil', label: 'Profil Dusun', icon: User },
 ];
 
