@@ -251,8 +251,8 @@ export default async function HomePage() {
                 </div>
               </div>
             </div>
-          </ScrollReveal>
           </div>
+        </ScrollReveal>
 
           {/* Sub-row additions: Charts, Timeline & Organization Cards */}
           <ScrollReveal delay={150}>
