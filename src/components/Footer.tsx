@@ -88,7 +88,7 @@ export default function Footer() {
       <div className="bg-[#166534] py-5 border-t border-white/5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center md:flex md:justify-between md:items-center">
           <p className="text-xs text-white/70 font-medium">
-            Copyright &copy; 2026 RT 01 Dusun Garongan. All rights reserved.
+            Copyright &copy; 2026 RT 01 Dusun Garongan. All rights reserved. - KKN AB.84.111 Megarongan
           </p>
           <p className="text-xs text-white/60 mt-2.5 md:mt-0 font-medium">
             Masyarakat Hebat, Dusun Mandiri, Alam Lestari.
