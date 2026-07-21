@@ -290,24 +290,34 @@ export default async function HomePage() {
                 <div className="bg-white p-8 rounded-3xl border border-slate-200/70 hover-scale-glow transition-all flex flex-col justify-between space-y-6 shadow-sm">
                   <h4 className="font-extrabold text-xs uppercase tracking-wider text-[#14532D]">Komposisi Kelompok Usia</h4>
                   <div className="grid grid-cols-5 gap-3 pt-8 h-56 items-end">
-                    {Object.entries(profil.data_kependudukan.kelompok_usia).map(([ageGroup, count]) => {
+                    {(() => {
+                      const ageGroupOrder = [
+                        "Balita (0-5 th)",
+                        "Anak (6-12 th)",
+                        "Remaja (13-18 th)",
+                        "Dewasa (19-59 th)",
+                        "Lansia (60+ th)"
+                      ];
                       const maxCount = Math.max(...Object.values(profil.data_kependudukan.kelompok_usia) as number[]);
-                      const heightPct = maxCount > 0 ? ((count as number) / maxCount) * 80 : 0;
-                      return (
-                        <div key={ageGroup} className="flex flex-col items-center space-y-2 h-full justify-end group">
-                          <div className="text-[10px] font-extrabold text-[#14532D] opacity-0 group-hover:opacity-100 transition-opacity bg-[#F5F7F2] px-2 py-0.5 rounded shadow-sm border border-slate-100">
-                            {count}
+                      return ageGroupOrder.map((ageGroup) => {
+                        const count = (profil.data_kependudukan.kelompok_usia as Record<string, number>)[ageGroup] || 0;
+                        const heightPct = maxCount > 0 ? (count / maxCount) * 80 : 0;
+                        return (
+                          <div key={ageGroup} className="flex flex-col items-center space-y-2 h-full justify-end group">
+                            <div className="text-[10px] font-extrabold text-[#14532D] opacity-0 group-hover:opacity-100 transition-opacity bg-[#F5F7F2] px-2 py-0.5 rounded shadow-sm border border-slate-100">
+                              {count}
+                            </div>
+                            <div 
+                              className="w-full bg-gradient-to-t from-[#14532D] to-[#84CC16] hover:from-[#84CC16] hover:to-[#14532D] rounded-t-2xl transition-all duration-500 shadow-sm" 
+                              style={{ height: `${Math.max(heightPct, 8)}%` }} 
+                            />
+                            <div className="text-[9px] sm:text-[10px] text-slate-500 text-center font-bold leading-none mt-2 min-h-[24px] flex items-center justify-center">
+                              {ageGroup}
+                            </div>
                           </div>
-                          <div 
-                            className="w-full bg-gradient-to-t from-[#14532D] to-[#84CC16] hover:from-[#84CC16] hover:to-[#14532D] rounded-t-2xl transition-all duration-500 shadow-sm" 
-                            style={{ height: `${Math.max(heightPct, 8)}%` }} 
-                          />
-                          <div className="text-[9px] sm:text-[10px] text-slate-500 text-center font-bold leading-none mt-2 min-h-[24px] flex items-center justify-center">
-                            {ageGroup}
-                          </div>
-                        </div>
-                      );
-                    })}
+                        );
+                      });
+                    })()}
                   </div>
                 </div>
 
