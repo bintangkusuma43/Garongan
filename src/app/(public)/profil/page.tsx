@@ -5,6 +5,7 @@ export const dynamic = 'force-dynamic';
 import React from 'react';
 import { Compass, Users, GitBranch, MapPin, Calendar, Sparkles } from 'lucide-react';
 import { createClient } from '@/lib/supabase/server';
+import { ScrollReveal } from '@/components/ScrollReveal';
 
 // Fallback profile data
 const mockProfil = {
@@ -103,63 +104,66 @@ export default async function ProfilPage() {
       </div>
 
       {/* 1. Letak Geografis */}
-      <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-white p-8 rounded-3xl border border-slate-200/60 hover-scale-glow transition-all shadow-sm">
-        <div className="lg:col-span-4 flex flex-col items-center justify-center p-8 bg-gradient-to-br from-[#14532D] to-[#166534] rounded-2xl space-y-4 text-white hover-glow duration-300">
-          <div className="bg-white/10 p-4.5 rounded-2xl shadow-inner border border-white/15">
-            <Compass className="h-8 w-8 text-[#84CC16]" />
+      <ScrollReveal>
+        <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-white p-8 rounded-3xl border border-slate-200/60 hover-scale-glow transition-all shadow-sm">
+          <div className="lg:col-span-4 flex flex-col items-center justify-center p-8 bg-gradient-to-br from-[#14532D] to-[#166534] rounded-2xl space-y-4 text-white hover-glow duration-300">
+            <div className="bg-white/10 p-4.5 rounded-2xl shadow-inner border border-white/15">
+              <Compass className="h-8 w-8 text-[#84CC16]" />
+            </div>
+            <h3 className="text-xl font-extrabold font-heading text-white tracking-wide">Letak Geografis</h3>
+            <span className="text-xs font-extrabold px-4 py-2 bg-white/15 backdrop-blur-md rounded-xl border border-white/20">
+              Lereng Merapi Selatan
+            </span>
           </div>
-          <h3 className="text-xl font-extrabold font-heading text-white tracking-wide">Letak Geografis</h3>
-          <span className="text-xs font-extrabold px-4 py-2 bg-white/15 backdrop-blur-md rounded-xl border border-white/20">
-            Lereng Merapi Selatan
-          </span>
-        </div>
-        <div className="lg:col-span-8 space-y-4 pl-0 lg:pl-6">
-          <p className="text-slate-600 leading-relaxed text-sm md:text-base font-sans font-medium whitespace-pre-line">
-            {profil.letak_geografis}
-          </p>
-          <div className="flex items-center space-x-2.5 text-xs text-[#14532D] font-bold">
-            <MapPin className="h-5 w-5 text-[#84CC16] flex-shrink-0" />
-            <span>Ketinggian: ~450 mdpl | Topografi: Perbukitan / Lereng Gunung Berapi Subur</span>
+          <div className="lg:col-span-8 space-y-4 pl-0 lg:pl-6">
+            <p className="text-slate-600 leading-relaxed text-sm md:text-base font-sans font-medium whitespace-pre-line">
+              {profil.letak_geografis}
+            </p>
+            <div className="flex items-center space-x-2.5 text-xs text-[#14532D] font-bold">
+              <MapPin className="h-5 w-5 text-[#84CC16] flex-shrink-0" />
+              <span>Ketinggian: ~450 mdpl | Topografi: Perbukitan / Lereng Gunung Berapi Subur</span>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </ScrollReveal>
 
       {/* 2. Data Kependudukan */}
-      <section className="space-y-10">
-        <div className="flex items-center space-x-3 mb-6">
-          <div className="bg-[#F5F7F2] text-[#14532D] px-4 py-2 rounded-xl border border-[#14532D]/5 shadow-sm">
-            <Users className="h-5 w-5 text-[#84CC16] animate-float" />
+      <ScrollReveal delay={100}>
+        <section className="space-y-10">
+          <div className="flex items-center space-x-3 mb-6">
+            <div className="bg-[#F5F7F2] text-[#14532D] px-4 py-2 rounded-xl border border-[#14532D]/5 shadow-sm">
+              <Users className="h-5 w-5 text-[#84CC16] animate-float" />
+            </div>
+            <h2 className="text-2xl font-extrabold text-[#14532D] font-heading">Data Kependudukan (Demografi)</h2>
           </div>
-          <h2 className="text-2xl font-extrabold text-[#14532D] font-heading">Data Kependudukan (Demografi)</h2>
-        </div>
 
-        {/* Highlight Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div className="bg-white p-6 rounded-3xl border border-slate-200/60 hover-scale-glow transition-all text-center shadow-sm">
-            <Users className="mx-auto h-5 w-5 text-[#84CC16] mb-1.5" />
-            <span className="text-slate-500 text-xs font-extrabold uppercase tracking-wider block">Total Penduduk</span>
-            <span className="text-4xl font-extrabold text-[#14532D] block mt-2">{total_penduduk}</span>
-            <span className="text-[10px] text-slate-400 font-bold block mt-1">Jiwa terdaftar di RT 01</span>
+          {/* Highlight Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="bg-white p-6 rounded-3xl border border-slate-200/60 hover-scale-glow transition-all text-center shadow-sm">
+              <Users className="mx-auto h-5 w-5 text-[#84CC16] mb-1.5" />
+              <span className="text-slate-500 text-xs font-extrabold uppercase tracking-wider block">Total Penduduk</span>
+              <span className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#14532D] to-[#84CC16] block mt-2">{total_penduduk}</span>
+              <span className="text-[10px] text-slate-400 font-bold block mt-1">Jiwa terdaftar di RT 01</span>
+            </div>
+            <div className="bg-white p-6 rounded-3xl border border-slate-200/60 hover-scale-glow transition-all text-center shadow-sm">
+              <GitBranch className="mx-auto h-5 w-5 text-[#84CC16] mb-1.5" />
+              <span className="text-slate-500 text-xs font-extrabold uppercase tracking-wider block">Kepala Keluarga</span>
+              <span className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#14532D] to-[#84CC16] block mt-2">{kepala_keluarga}</span>
+              <span className="text-[10px] text-slate-400 font-bold block mt-1">Rata-rata 3.2 jiwa/KK</span>
+            </div>
+            <div className="bg-white p-6 rounded-3xl border border-slate-200/60 hover-scale-glow transition-all text-center shadow-sm">
+              <Users className="mx-auto h-5 w-5 text-[#84CC16] mb-1.5" />
+              <span className="text-slate-500 text-xs font-extrabold uppercase tracking-wider block">Laki-Laki</span>
+              <span className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#14532D] to-[#84CC16] block mt-2">{laki_laki}</span>
+              <span className="text-[10px] text-[#14532D] font-extrabold block mt-1">{pctLaki}% dari total</span>
+            </div>
+            <div className="bg-white p-6 rounded-3xl border border-slate-200/60 hover-scale-glow transition-all text-center shadow-sm">
+              <Users className="mx-auto h-5 w-5 text-[#84CC16] mb-1.5" />
+              <span className="text-slate-500 text-xs font-extrabold uppercase tracking-wider block">Perempuan</span>
+              <span className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#14532D] to-[#84CC16] block mt-2">{perempuan}</span>
+              <span className="text-[10px] text-[#14532D] font-extrabold block mt-1">{pctPerempuan}% dari total</span>
+            </div>
           </div>
-          <div className="bg-white p-6 rounded-3xl border border-slate-200/60 hover-scale-glow transition-all text-center shadow-sm">
-            <GitBranch className="mx-auto h-5 w-5 text-[#84CC16] mb-1.5" />
-            <span className="text-slate-500 text-xs font-extrabold uppercase tracking-wider block">Kepala Keluarga</span>
-            <span className="text-4xl font-extrabold text-[#14532D] block mt-2">{kepala_keluarga}</span>
-            <span className="text-[10px] text-slate-400 font-bold block mt-1">Rata-rata 3.2 jiwa/KK</span>
-          </div>
-          <div className="bg-white p-6 rounded-3xl border border-slate-200/60 hover-scale-glow transition-all text-center shadow-sm">
-            <Users className="mx-auto h-5 w-5 text-[#84CC16] mb-1.5" />
-            <span className="text-slate-500 text-xs font-extrabold uppercase tracking-wider block">Laki-Laki</span>
-            <span className="text-4xl font-extrabold text-[#14532D] block mt-2">{laki_laki}</span>
-            <span className="text-[10px] text-[#14532D] font-extrabold block mt-1">{pctLaki}% dari total</span>
-          </div>
-          <div className="bg-white p-6 rounded-3xl border border-slate-200/60 hover-scale-glow transition-all text-center shadow-sm">
-            <Users className="mx-auto h-5 w-5 text-[#84CC16] mb-1.5" />
-            <span className="text-slate-500 text-xs font-extrabold uppercase tracking-wider block">Perempuan</span>
-            <span className="text-4xl font-extrabold text-[#14532D] block mt-2">{perempuan}</span>
-            <span className="text-[10px] text-[#14532D] font-extrabold block mt-1">{pctPerempuan}% dari total</span>
-          </div>
-        </div>
 
         {/* Charts Container */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 pt-4">
@@ -239,9 +243,11 @@ export default async function ProfilPage() {
 
         </div>
       </section>
+      </ScrollReveal>
 
       {/* 3. Timeline Sejarah Dusun (Short History Timeline) */}
-      <section className="space-y-10">
+      <ScrollReveal>
+        <section className="space-y-10">
         <div className="flex items-center space-x-3 mb-6">
           <div className="bg-[#F5F7F2] text-[#14532D] px-4 py-2 rounded-xl border border-[#14532D]/5 shadow-sm">
             <Calendar className="h-5 w-5 text-[#84CC16]" />
@@ -251,7 +257,7 @@ export default async function ProfilPage() {
 
         <div className="relative border-l-3 border-[#F5F7F2] ml-4 md:ml-6 space-y-10 py-4">
           {/* Milestone 1 */}
-          <div className="relative pl-8 md:pl-10 group transition-all duration-300 cursor-default">
+          <div className="relative pl-8 md:pl-10 group transition-all duration-300 cursor-default hover:translate-x-2">
             <div className="absolute -left-[10px] top-2.5 bg-white border-4 border-slate-200 group-hover:border-[#14532D] rounded-full w-5 h-5 flex items-center justify-center transition-all duration-300 group-hover:scale-110 shadow-md" />
             <span className="inline-block px-3 py-1.5 bg-[#F5F7F2] group-hover:bg-[#14532D] group-hover:text-white text-[#14532D] text-[10px] font-extrabold rounded-full uppercase tracking-wider mb-2.5 transition-all duration-300 border border-[#14532D]/5 shadow-sm">Tahun 1972</span>
             <h4 className="font-extrabold text-slate-800 group-hover:text-[#14532D] text-base sm:text-lg font-heading transition-colors">Pembukaan Wilayah Hunian</h4>
@@ -259,7 +265,7 @@ export default async function ProfilPage() {
           </div>
 
           {/* Milestone 2 */}
-          <div className="relative pl-8 md:pl-10 group transition-all duration-300 cursor-default">
+          <div className="relative pl-8 md:pl-10 group transition-all duration-300 cursor-default hover:translate-x-2">
             <div className="absolute -left-[10px] top-2.5 bg-white border-4 border-slate-200 group-hover:border-[#14532D] rounded-full w-5 h-5 flex items-center justify-center transition-all duration-300 group-hover:scale-110 shadow-md" />
             <span className="inline-block px-3 py-1.5 bg-[#F5F7F2] group-hover:bg-[#14532D] group-hover:text-white text-[#14532D] text-[10px] font-extrabold rounded-full uppercase tracking-wider mb-2.5 transition-all duration-300 border border-[#14532D]/5 shadow-sm">Tahun 1995</span>
             <h4 className="font-extrabold text-slate-800 group-hover:text-[#14532D] text-base sm:text-lg font-heading transition-colors">Sentra Budidaya Salak Pondoh</h4>
@@ -267,7 +273,7 @@ export default async function ProfilPage() {
           </div>
 
           {/* Milestone 3 */}
-          <div className="relative pl-8 md:pl-10 group transition-all duration-300 cursor-default">
+          <div className="relative pl-8 md:pl-10 group transition-all duration-300 cursor-default hover:translate-x-2">
             <div className="absolute -left-[10px] top-2.5 bg-white border-4 border-slate-200 group-hover:border-[#14532D] rounded-full w-5 h-5 flex items-center justify-center transition-all duration-300 group-hover:scale-110 shadow-md" />
             <span className="inline-block px-3 py-1.5 bg-[#F5F7F2] group-hover:bg-[#14532D] group-hover:text-white text-[#14532D] text-[10px] font-extrabold rounded-full uppercase tracking-wider mb-2.5 transition-all duration-300 border border-[#14532D]/5 shadow-sm">Tahun 2012</span>
             <h4 className="font-extrabold text-slate-800 group-hover:text-[#14532D] text-base sm:text-lg font-heading transition-colors">Deklarasi Desa Wisata</h4>
@@ -275,7 +281,7 @@ export default async function ProfilPage() {
           </div>
 
           {/* Milestone 4 */}
-          <div className="relative pl-8 md:pl-10 group transition-all duration-300 cursor-default">
+          <div className="relative pl-8 md:pl-10 group transition-all duration-300 cursor-default hover:translate-x-2">
             <div className="absolute -left-[10px] top-2.5 bg-white border-4 border-slate-200 group-hover:border-[#14532D] rounded-full w-5 h-5 flex items-center justify-center transition-all duration-300 group-hover:scale-110 shadow-md" />
             <span className="inline-block px-3 py-1.5 bg-[#F5F7F2] group-hover:bg-[#14532D] group-hover:text-white text-[#14532D] text-[10px] font-extrabold rounded-full uppercase tracking-wider mb-2.5 transition-all duration-300 border border-[#14532D]/5 shadow-sm">Tahun 2020</span>
             <h4 className="font-extrabold text-slate-800 group-hover:text-[#14532D] text-base sm:text-lg font-heading transition-colors">Inisiasi KWT RT 01</h4>
@@ -283,7 +289,7 @@ export default async function ProfilPage() {
           </div>
 
           {/* Milestone 5 */}
-          <div className="relative pl-8 md:pl-10 group transition-all duration-300 cursor-default">
+          <div className="relative pl-8 md:pl-10 group transition-all duration-300 cursor-default hover:translate-x-2">
             <div className="absolute -left-[10px] top-2.5 bg-white border-4 border-slate-200 group-hover:border-[#14532D] rounded-full w-5 h-5 flex items-center justify-center transition-all duration-300 group-hover:scale-110 shadow-md" />
             <span className="inline-block px-3 py-1.5 bg-[#F5F7F2] group-hover:bg-[#14532D] group-hover:text-white text-[#14532D] text-[10px] font-extrabold rounded-full uppercase tracking-wider mb-2.5 transition-all duration-300 border border-[#14532D]/5 shadow-sm">Tahun 2026</span>
             <h4 className="font-extrabold text-slate-800 group-hover:text-[#14532D] text-base sm:text-lg font-heading transition-colors">Digitalisasi Portal Informasi</h4>
@@ -291,9 +297,11 @@ export default async function ProfilPage() {
           </div>
         </div>
       </section>
+      </ScrollReveal>
 
       {/* 4. Struktur Organisasi */}
-      <section className="space-y-8">
+      <ScrollReveal>
+        <section className="space-y-8">
         <div className="flex items-center space-x-3 mb-6">
           <div className="bg-[#F5F7F2] text-[#14532D] px-4 py-2 rounded-xl border border-[#14532D]/5 shadow-sm">
             <GitBranch className="h-5 w-5 text-[#84CC16]" />
@@ -325,6 +333,7 @@ export default async function ProfilPage() {
           ))}
         </div>
       </section>
+      </ScrollReveal>
 
     </div>
   );

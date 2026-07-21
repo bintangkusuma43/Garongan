@@ -7,6 +7,7 @@ import { Leaf, Tent, Compass, Sparkles, Award, CheckCircle, MapPin } from 'lucid
 import Link from 'next/link';
 import { createClient } from '@/lib/supabase/server';
 import { PhotoCarousel } from '@/components/PhotoCarousel';
+import { ScrollReveal } from '@/components/ScrollReveal';
 
 interface SearchParams {
   tab?: string;
@@ -96,23 +97,25 @@ export default async function PotensiPage(props: { searchParams: Promise<SearchP
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-16 space-y-16 bg-[#FAFAF9] text-[#1F2937]">
       
       {/* Header */}
-      <div className="text-center max-w-3xl mx-auto space-y-4 animate-fade-in-up">
-        <div className="inline-flex items-center space-x-1.5 bg-[#F5F7F2] text-[#14532D] px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider border border-[#14532D]/5 shadow-xs">
-          <Sparkles className="h-3.5 w-3.5 text-[#84CC16] animate-float" />
-          <span>Keanekaragaman Dusun</span>
+      <ScrollReveal>
+        <div className="text-center max-w-3xl mx-auto space-y-4 animate-fade-in-up">
+          <div className="inline-flex items-center space-x-1.5 bg-[#F5F7F2] text-[#14532D] px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider border border-[#14532D]/5 shadow-xs">
+            <Sparkles className="h-3.5 w-3.5 text-[#84CC16] animate-float" />
+            <span>Keanekaragaman Dusun</span>
+          </div>
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-[#14532D] tracking-tight font-heading leading-tight">
+            Potensi Dusun Garongan
+          </h1>
+          <p className="text-slate-600 leading-relaxed text-sm md:text-base font-sans font-medium">
+            Masyarakat aktif mengelola berbagai potensi lokal mulai dari kelompok tani hingga destinasi wisata alam terintegrasi.
+          </p>
+          {isOffline && (
+            <span className="inline-block px-3 py-1 bg-yellow-50 text-yellow-800 text-[10px] rounded-full font-medium border border-yellow-100">
+              ⚠️ Mode Offline. Menampilkan konten lokal.
+            </span>
+          )}
         </div>
-        <h1 className="text-4xl sm:text-5xl font-extrabold text-[#14532D] tracking-tight font-heading leading-tight">
-          Potensi Dusun Garongan
-        </h1>
-        <p className="text-slate-600 leading-relaxed text-sm md:text-base font-sans font-medium">
-          Masyarakat aktif mengelola berbagai potensi lokal mulai dari kelompok tani hingga destinasi wisata alam terintegrasi.
-        </p>
-        {isOffline && (
-          <span className="inline-block px-3 py-1 bg-yellow-50 text-yellow-800 text-[10px] rounded-full font-medium border border-yellow-100">
-            ⚠️ Mode Offline. Menampilkan konten lokal.
-          </span>
-        )}
-      </div>
+      </ScrollReveal>
 
       {/* 3 Fixed Tabs Navigation */}
       <div className="flex justify-center border-b border-slate-200/60 pb-2">
