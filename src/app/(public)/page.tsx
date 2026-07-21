@@ -201,55 +201,51 @@ export default async function HomePage() {
           {/* Top Row: Foto Dusun | Informasi Profil */}
           <ScrollReveal>
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
-            {/* Left: Foto Dusun */}
-            <div className="lg:col-span-5 relative">
-              <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl border-4 border-white ring-1 ring-slate-200/40 bg-slate-100 hover-scale-glow duration-500">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&q=80&w=800"
-                  alt="Pesona Dusun Garongan"
-                  className="object-cover w-full h-full hover:scale-105 transition-transform duration-1000"
-                />
-              </div>
-              <div className="absolute -bottom-6 -right-6 bg-gradient-to-br from-[#14532D] to-[#166534] text-white p-5.5 rounded-2xl shadow-2xl hidden sm:block max-w-[260px] border border-white/10 hover-glow duration-300">
-                <span className="block font-bold text-sm text-[#84CC16] mb-1">Lereng Merapi 🏔️</span>
-                <span className="text-[11px] text-white/80 leading-relaxed font-semibold block">Keindahan alam pedesaan yang sejuk, subur, dan asri.</span>
-              </div>
-            </div>
-
-            {/* Right: Informasi Profil */}
-            <div className="lg:col-span-7 space-y-6">
-              <div className="inline-flex items-center space-x-1.5 bg-[#F5F7F2] text-[#14532D] px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider border border-[#14532D]/5">
-                <Users className="h-3.5 w-3.5 text-[#84CC16]" />
-                <span>Geografi & Demografi</span>
-              </div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#14532D] tracking-tight font-heading leading-tight">
-                Sekilas Tentang Dusun Garongan
-              </h2>
-              <p className="text-slate-600 leading-relaxed text-base font-sans font-medium">
-                Dusun Garongan terletak di lereng Gunung Merapi bagian selatan, Kalurahan Wonokerto, Kapanewon Turi, Sleman. Dikenal dengan udara pegunungan yang segar dan tanah subur, dusun ini merupakan salah satu sentra pertanian salak pondoh serta destinasi pariwisata petualangan alam yang berwawasan lingkungan.
-              </p>
-              
-              {/* Premium Stat Widget Grid */}
-              <div className="grid grid-cols-3 gap-4 pt-6 border-t border-slate-100">
-                <div className="bg-gradient-to-b from-white to-[#F5F7F2] p-5 rounded-2xl border border-slate-200/50 text-center hover-scale-glow transition-all duration-300 shadow-sm">
-                  <Users className="mx-auto h-5 w-5 text-[#84CC16] mb-1.5" />
-                  <span className="block text-3xl font-extrabold text-[#14532D]">{profil.data_kependudukan.total_penduduk}</span>
-                  <span className="text-[10px] text-slate-500 uppercase font-extrabold tracking-wider mt-1 block">Total Penduduk</span>
-                </div>
-                <div className="bg-gradient-to-b from-white to-[#F5F7F2] p-5 rounded-2xl border border-slate-200/50 text-center hover-scale-glow transition-all duration-300 shadow-sm">
-                  <GitBranch className="mx-auto h-5 w-5 text-[#84CC16] mb-1.5" />
-                  <span className="block text-3xl font-extrabold text-[#14532D]">{profil.data_kependudukan.kepala_keluarga}</span>
-                  <span className="text-[10px] text-slate-500 uppercase font-extrabold tracking-wider mt-1 block">Kepala Keluarga</span>
-                </div>
-                <div className="bg-gradient-to-b from-white to-[#F5F7F2] p-5 rounded-2xl border border-slate-200/50 text-center hover-scale-glow transition-all duration-300 shadow-sm">
-                  <MapPin className="mx-auto h-5 w-5 text-[#84CC16] mb-1.5" />
-                  <span className="block text-3xl font-extrabold text-[#14532D]">RT 01</span>
-                  <span className="text-[10px] text-slate-500 uppercase font-extrabold tracking-wider mt-1 block">Fokus Wilayah</span>
-                </div>
-              </div>
-            </div>
-          </div>
+             {/* Left: Foto Dusun */}
+             <div className="lg:col-span-5 relative">
+               <div className="aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl border-4 border-white ring-1 ring-slate-200/40 bg-slate-100 hover-scale-glow duration-500 animate-float">
+                 {/* eslint-disable-next-line @next/next/no-img-element */}
+                 <img
+                   src="/images/dashboard/geografi_demografi.webp"
+                   alt="Pesona Dusun Garongan"
+                   className="object-cover w-full h-full hover:scale-105 transition-transform duration-1000"
+                 />
+               </div>
+             </div>
+ 
+             {/* Right: Informasi Profil */}
+             <div className="lg:col-span-7 space-y-6">
+               <div className="inline-flex items-center space-x-1.5 bg-[#F5F7F2] text-[#14532D] px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider border border-[#14532D]/5">
+                 <Users className="h-3.5 w-3.5 text-[#84CC16]" />
+                 <span>Geografi & Demografi</span>
+               </div>
+               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#14532D] tracking-tight font-heading leading-tight">
+                 Sekilas Tentang Dusun Garongan
+               </h2>
+               <p className="text-slate-600 leading-relaxed text-base font-sans font-medium">
+                 Dusun Garongan terletak di lereng Gunung Merapi bagian selatan, Kalurahan Wonokerto, Kapanewon Turi, Sleman. Dikenal dengan udara pegunungan yang segar dan tanah subur, dusun ini merupakan salah satu sentra pertanian salak pondoh serta destinasi pariwisata petualangan alam yang berwawasan lingkungan.
+               </p>
+               
+               {/* Premium Stat Widget Grid */}
+               <div className="grid grid-cols-3 gap-4 pt-6 border-t border-slate-100">
+                 <div className="bg-gradient-to-b from-white to-[#F5F7F2] p-5 rounded-2xl border border-slate-200/50 text-center hover-scale-glow transition-all duration-300 shadow-sm">
+                   <Users className="mx-auto h-5 w-5 text-[#84CC16] mb-1.5" />
+                   <span className="block text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#14532D] to-[#84CC16]">{profil.data_kependudukan.total_penduduk}</span>
+                   <span className="text-[10px] text-slate-500 uppercase font-extrabold tracking-wider mt-1 block">Total Penduduk</span>
+                 </div>
+                 <div className="bg-gradient-to-b from-white to-[#F5F7F2] p-5 rounded-2xl border border-slate-200/50 text-center hover-scale-glow transition-all duration-300 shadow-sm">
+                   <GitBranch className="mx-auto h-5 w-5 text-[#84CC16] mb-1.5" />
+                   <span className="block text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#14532D] to-[#84CC16]">{profil.data_kependudukan.kepala_keluarga}</span>
+                   <span className="text-[10px] text-slate-500 uppercase font-extrabold tracking-wider mt-1 block">Kepala Keluarga</span>
+                 </div>
+                 <div className="bg-gradient-to-b from-white to-[#F5F7F2] p-5 rounded-2xl border border-slate-200/50 text-center hover-scale-glow transition-all duration-300 shadow-sm">
+                   <MapPin className="mx-auto h-5 w-5 text-[#84CC16] mb-1.5" />
+                   <span className="block text-3xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-[#14532D] to-[#84CC16]">RT 01</span>
+                   <span className="text-[10px] text-slate-500 uppercase font-extrabold tracking-wider mt-1 block">Fokus Wilayah</span>
+                 </div>
+               </div>
+             </div>
+           </div>
         </ScrollReveal>
 
           {/* Sub-row additions: Charts, Timeline & Organization Cards */}
