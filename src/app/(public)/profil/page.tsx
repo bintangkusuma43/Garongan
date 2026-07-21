@@ -170,25 +170,33 @@ export default async function ProfilPage() {
               <h3 className="font-extrabold text-[#14532D] text-lg font-heading">Mata Pencaharian Utama</h3>
               <p className="text-xs text-slate-500 font-bold mt-0.5">Distribusi pekerjaan produktif warga RT 01 Garongan</p>
             </div>
-            <div className="space-y-4">
-              {Object.entries(pekerjaan).map(([job, count]) => {
-                const percent = total_penduduk > 0 ? ((count as number) / total_penduduk * 200).toFixed(1) : "0";
-                return (
-                  <div key={job} className="space-y-1.5">
-                    <div className="flex justify-between text-xs font-semibold text-slate-700">
-                      <span>{job}</span>
-                      <span className="text-[#14532D] font-extrabold">{count} Jiwa</span>
+              {(() => {
+                const jobOrder = [
+                  "Petani / Pekebun",
+                  "Karyawan Swasta",
+                  "Wiraswasta",
+                  "PNS / TNI / Polri",
+                  "Lainnya"
+                ];
+                return jobOrder.map((job) => {
+                  const count = (pekerjaan as Record<string, number>)[job] || 0;
+                  const percent = total_penduduk > 0 ? (count / total_penduduk * 200).toFixed(1) : "0";
+                  return (
+                    <div key={job} className="space-y-1.5">
+                      <div className="flex justify-between text-xs font-semibold text-slate-700">
+                        <span>{job}</span>
+                        <span className="text-[#14532D] font-extrabold">{count} Jiwa</span>
+                      </div>
+                      <div className="w-full bg-[#F5F7F2] rounded-full h-3 overflow-hidden">
+                        <div 
+                          className="bg-gradient-to-r from-[#14532D] to-[#84CC16] h-full rounded-full transition-all duration-500" 
+                          style={{ width: `${Math.min(parseFloat(percent) * 3, 100)}%` }} 
+                        />
+                      </div>
                     </div>
-                    <div className="w-full bg-[#F5F7F2] rounded-full h-3 overflow-hidden">
-                      <div 
-                        className="bg-gradient-to-r from-[#14532D] to-[#84CC16] h-full rounded-full transition-all duration-500" 
-                        style={{ width: `${Math.min(parseFloat(percent) * 3, 100)}%` }} 
-                      />
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
+                  );
+                });
+              })()}
           </div>
 
           {/* Chart 2: Kelompok Usia (Vertical Bar Chart Layout) */}

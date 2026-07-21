@@ -266,23 +266,33 @@ export default async function HomePage() {
                 <div className="bg-white p-8 rounded-3xl border border-slate-200/70 hover-scale-glow transition-all space-y-6 shadow-sm">
                   <h4 className="font-extrabold text-xs uppercase tracking-wider text-[#14532D]">Mata Pencaharian Utama</h4>
                   <div className="space-y-4">
-                    {Object.entries(profil.data_kependudukan.pekerjaan).map(([job, count]) => {
-                      const pct = profil.data_kependudukan.total_penduduk > 0 ? ((count as number) / profil.data_kependudukan.total_penduduk * 200).toFixed(1) : "0";
-                      return (
-                        <div key={job} className="space-y-1.5">
-                          <div className="flex justify-between text-xs font-semibold text-slate-700">
-                            <span>{job}</span>
-                            <span className="font-extrabold text-[#14532D]">{count} Jiwa</span>
+                    {(() => {
+                      const jobOrder = [
+                        "Petani / Pekebun",
+                        "Karyawan Swasta",
+                        "Wiraswasta",
+                        "PNS / TNI / Polri",
+                        "Lainnya"
+                      ];
+                      return jobOrder.map((job) => {
+                        const count = (profil.data_kependudukan.pekerjaan as Record<string, number>)[job] || 0;
+                        const pct = profil.data_kependudukan.total_penduduk > 0 ? (count / profil.data_kependudukan.total_penduduk * 200).toFixed(1) : "0";
+                        return (
+                          <div key={job} className="space-y-1.5">
+                            <div className="flex justify-between text-xs font-semibold text-slate-700">
+                              <span>{job}</span>
+                              <span className="font-extrabold text-[#14532D]">{count} Jiwa</span>
+                            </div>
+                            <div className="w-full bg-[#F5F7F2] rounded-full h-3 overflow-hidden">
+                              <div 
+                                className="bg-gradient-to-r from-[#14532D] to-[#84CC16] h-full rounded-full transition-all duration-500" 
+                                style={{ width: `${Math.min(parseFloat(pct) * 3, 100)}%` }} 
+                              />
+                            </div>
                           </div>
-                          <div className="w-full bg-[#F5F7F2] rounded-full h-3 overflow-hidden">
-                            <div 
-                              className="bg-gradient-to-r from-[#14532D] to-[#84CC16] h-full rounded-full transition-all duration-500" 
-                              style={{ width: `${Math.min(parseFloat(pct) * 3, 100)}%` }} 
-                            />
-                          </div>
-                        </div>
-                      );
-                    })}
+                        );
+                      });
+                    })()}
                   </div>
                 </div>
 
