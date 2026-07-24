@@ -9,9 +9,110 @@ export default function MitigasiPage() {
   const [lightboxImage, setLightboxImage] = useState<string | null>(null);
   const [lightboxTitle, setLightboxTitle] = useState<string>('');
 
+  const [scale, setScale] = useState(1);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  const didDragRef = React.useRef(false);
+  const dragStartPosRef = React.useRef({ x: 0, y: 0 });
+
   const openLightbox = (imgSrc: string, title: string) => {
     setLightboxImage(imgSrc);
     setLightboxTitle(title);
+    setScale(1);
+    setPosition({ x: 0, y: 0 });
+    didDragRef.current = false;
+  };
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (scale <= 1) return;
+    setIsDragging(true);
+    didDragRef.current = false;
+    dragStartPosRef.current = { x: e.clientX, y: e.clientY };
+    setDragStart({ x: e.clientX - position.x, y: e.clientY - position.y });
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging) return;
+    const dx = Math.abs(e.clientX - dragStartPosRef.current.x);
+    const dy = Math.abs(e.clientY - dragStartPosRef.current.y);
+    if (dx > 5 || dy > 5) {
+      didDragRef.current = true;
+    }
+    setPosition({
+      x: e.clientX - dragStart.x,
+      y: e.clientY - dragStart.y
+    });
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  const handleWheel = (e: React.WheelEvent) => {
+    const zoomFactor = 0.15;
+    const newScale = e.deltaY < 0 ? Math.min(scale + zoomFactor, 5) : Math.max(scale - zoomFactor, 1);
+    if (newScale === 1) {
+      setPosition({ x: 0, y: 0 });
+    }
+    setScale(newScale);
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (scale <= 1) return;
+    const touch = e.touches[0];
+    setIsDragging(true);
+    didDragRef.current = false;
+    dragStartPosRef.current = { x: touch.clientX, y: touch.clientY };
+    setDragStart({ x: touch.clientX - position.x, y: touch.clientY - position.y });
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (!isDragging) return;
+    const touch = e.touches[0];
+    const dx = Math.abs(touch.clientX - dragStartPosRef.current.x);
+    const dy = Math.abs(touch.clientY - dragStartPosRef.current.y);
+    if (dx > 5 || dy > 5) {
+      didDragRef.current = true;
+    }
+    setPosition({
+      x: touch.clientX - dragStart.x,
+      y: touch.clientY - dragStart.y
+    });
+  };
+
+  const handleTouchEnd = () => {
+    setIsDragging(false);
+  };
+
+  const handleImageClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (didDragRef.current) {
+      didDragRef.current = false;
+      return;
+    }
+    // Single click only zooms IN when at normal scale 1
+    if (scale === 1) {
+      setScale(2);
+    }
+    // When scale > 1, single click will NOT zoom out so accidental clicks don't reset view
+  };
+
+  const handleImageDoubleClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (scale > 1) {
+      setScale(1);
+      setPosition({ x: 0, y: 0 });
+    } else {
+      setScale(2.5);
+    }
+  };
+
+  const closeLightbox = () => {
+    setLightboxImage(null);
+    setScale(1);
+    setPosition({ x: 0, y: 0 });
+    didDragRef.current = false;
   };
 
   const maps = [
@@ -227,32 +328,93 @@ export default function MitigasiPage() {
         </section>
       </ScrollReveal>
 
-      {/* Lightbox Modal */}
+      {/* Lightbox Modal with Zoom & Pan */}
       {lightboxImage && (
         <div 
-          onClick={() => setLightboxImage(null)}
-          className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex flex-col items-center justify-center animate-fade-in cursor-zoom-out p-4"
+          onClick={closeLightbox}
+          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex flex-col items-center justify-center animate-fade-in p-4 overflow-hidden"
         >
           {/* Close Button */}
           <button
-            onClick={() => setLightboxImage(null)}
-            className="absolute top-6 right-6 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-all hover:scale-105 shadow-md focus:outline-none"
+            onClick={closeLightbox}
+            className="absolute top-6 right-6 p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-all hover:scale-105 shadow-md focus:outline-none z-50"
             aria-label="Close lightbox"
           >
             <X className="h-6 w-6" />
           </button>
 
-          {/* Large Image Frame */}
-          <div className="max-w-[95vw] max-h-[85vh] flex flex-col justify-center items-center" onClick={(e) => e.stopPropagation()}>
+          {/* Title */}
+          <div className="absolute top-6 left-6 text-white z-50 pointer-events-none hidden sm:block">
+            <h3 className="text-base font-extrabold font-heading tracking-wide">{lightboxTitle}</h3>
+            <p className="text-xs text-white/70 font-sans mt-0.5">
+              Scroll / Tombol (+/-) untuk zoom. Geser (drag) untuk melihat lokasi. Double-click / Reset untuk kembali.
+            </p>
+          </div>
+
+          {/* Large Image Frame Container (Handles Drag, Wheel, and Touch) */}
+          <div 
+            className="relative w-full h-[85vh] flex items-center justify-center select-none overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+            onWheel={handleWheel}
+            onMouseDown={handleMouseDown}
+            onMouseMove={handleMouseMove}
+            onMouseUp={handleMouseUp}
+            onMouseLeave={handleMouseUp}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+          >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={lightboxImage}
               alt={lightboxTitle}
-              className="object-contain max-h-[80vh] max-w-full rounded-xl shadow-2xl transition-all duration-300"
+              onClick={handleImageClick}
+              onDoubleClick={handleImageDoubleClick}
+              className="object-contain max-h-[75vh] max-w-[90vw] rounded-xl shadow-2xl origin-center select-none"
+              draggable={false}
+              style={{
+                transform: `translate(${position.x}px, ${position.y}px) scale(${scale})`,
+                cursor: scale > 1 ? (isDragging ? 'grabbing' : 'grab') : 'zoom-in',
+                transition: isDragging ? 'none' : 'transform 0.15s ease-out'
+              }}
             />
-            <span className="text-white/80 text-sm font-extrabold mt-4 text-center font-heading">
-              {lightboxTitle}
-            </span>
+
+            {/* Zoom Controls Overlay */}
+            <div className="absolute bottom-6 flex items-center bg-black/75 backdrop-blur-md px-4 py-2 rounded-2xl border border-white/10 space-x-4 z-50 text-white shadow-xl">
+              <button
+                type="button"
+                onClick={() => setScale(prev => Math.max(prev - 0.5, 1))}
+                disabled={scale === 1}
+                className="p-1.5 hover:bg-white/10 rounded-lg disabled:opacity-40 disabled:hover:bg-transparent font-bold text-base transition-colors w-8 h-8 flex items-center justify-center"
+                title="Zoom Out"
+              >
+                -
+              </button>
+              <span className="text-xs font-mono font-extrabold w-12 text-center">
+                {Math.round(scale * 100)}%
+              </span>
+              <button
+                type="button"
+                onClick={() => setScale(prev => Math.min(prev + 0.5, 5))}
+                disabled={scale === 5}
+                className="p-1.5 hover:bg-white/10 rounded-lg disabled:opacity-40 disabled:hover:bg-transparent font-bold text-base transition-colors w-8 h-8 flex items-center justify-center"
+                title="Zoom In"
+              >
+                +
+              </button>
+              <div className="h-4 w-[1px] bg-white/20" />
+              <button
+                type="button"
+                onClick={() => {
+                  setScale(1);
+                  setPosition({ x: 0, y: 0 });
+                }}
+                disabled={scale === 1 && position.x === 0 && position.y === 0}
+                className="px-3 py-1.5 text-[9px] uppercase font-extrabold bg-[#14532D] hover:bg-emerald-700 text-white rounded-lg disabled:opacity-40 transition-colors"
+              >
+                Reset
+              </button>
+            </div>
           </div>
         </div>
       )}
