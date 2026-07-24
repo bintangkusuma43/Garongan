@@ -34,13 +34,13 @@ export default function ImageGallery({ photos }: ImageGalleryProps) {
       {/* Primary Active Image Display */}
       <div 
         onClick={() => setIsOpen(true)}
-        className="relative aspect-[16/10] rounded-2xl overflow-hidden border border-border shadow-md bg-black flex items-center justify-center group cursor-zoom-in"
+        className="relative aspect-[16/9] rounded-3xl overflow-hidden border border-slate-200/80 shadow-md bg-[#F5F7F2] group cursor-zoom-in"
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={photos[activeIndex].foto_url}
           alt={`Foto Kegiatan ${activeIndex + 1}`}
-          className="object-contain max-h-full max-w-full w-auto h-auto transition-all duration-300"
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
         />
 
         {/* Zoom overlay on hover */}
@@ -85,8 +85,8 @@ export default function ImageGallery({ photos }: ImageGalleryProps) {
               <button
                 key={index}
                 onClick={() => setActiveIndex(index)}
-                className={`relative w-20 aspect-video rounded-lg overflow-hidden border-2 flex-shrink-0 transition-all ${
-                  isActive ? 'border-primary scale-95 shadow' : 'border-transparent opacity-70 hover:opacity-100'
+                className={`relative w-20 aspect-video rounded-xl overflow-hidden border-2 flex-shrink-0 transition-all ${
+                  isActive ? 'border-[#14532D] ring-2 ring-[#84CC16]/60 scale-95 shadow' : 'border-transparent opacity-70 hover:opacity-100'
                 }`}
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
