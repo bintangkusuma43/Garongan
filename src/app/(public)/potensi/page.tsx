@@ -29,9 +29,9 @@ interface Potensi {
 // Static fallbacks
 const kwtFallbackDesc = `Kelompok Wanita Tani (KWT) merupakan wadah pemberdayaan perempuan di Dusun Garongan yang berperan aktif dalam kegiatan pertanian dan pemanfaatan lahan pekarangan. Melalui berbagai kegiatan budidaya tanaman pangan, hortikultura, serta tanaman obat keluarga, KWT berupaya meningkatkan ketahanan pangan dan kesejahteraan keluarga. Selain sebagai sarana belajar dan berbagi pengetahuan, KWT juga menjadi media untuk mempererat kebersamaan serta mendorong pemanfaatan potensi lokal secara berkelanjutan.`;
 
-const jakaGarongFallbackDesc = `Jaka Garong (Jelajah Alam Kampung Garongan) merupakan destinasi wisata alam yang berada di Dusun Garongan, Kalurahan Wonokerto, Kapanewon Turi, Kabupaten Sleman. Berlokasi di lereng Gunung Merapi dengan suasana pedesaan yang masih asri, Jaka Garong menawarkan udara sejuk, pemandangan alam yang indah, serta lingkungan yang nyaman untuk berbagai aktivitas luar ruang.
+const jakaGarongFallbackDesc = `Jaka Garong adalah destinasi wisata alam yang berada di Dusun Garongan, Kalurahan Wonokerto, Kapanewon Turi, Kabupaten Sleman. Berlokasi di lereng Gunung Merapi, kawasan ini menawarkan udara yang sejuk, pemandangan alam yang indah, serta suasana pedesaan yang masih alami.
 
-Sebagai bagian dari Desa Wisata Garongan, Jaka Garong menyediakan berbagai fasilitas dan kegiatan, seperti bumi perkemahan (camping ground), outbound, makrab dan LDK, trekking Sungai Sempor, serta area pendopo dan fasilitas pendukung yang memadai. Keberadaan wisata ini menjadi salah satu daya tarik utama Dusun Garongan sekaligus berkontribusi dalam mengembangkan pariwisata berbasis masyarakat dan meningkatkan perekonomian warga.`;
+Jaka Garong dilengkapi dengan berbagai fasilitas, seperti camping ground, area outbound, pendopo, dan jalur susur Sungai Sempor yang dapat dimanfaatkan untuk kegiatan rekreasi, edukasi, maupun pelatihan. Dikelola bersama oleh masyarakat setempat, Jaka Garong menjadi salah satu destinasi unggulan yang mendukung pengembangan pariwisata berkelanjutan sekaligus meningkatkan kesejahteraan masyarakat Dusun Garongan.`;
 
 const getPhotos = (fotoUrl: string | null | undefined): string[] => {
   if (!fotoUrl) return [];

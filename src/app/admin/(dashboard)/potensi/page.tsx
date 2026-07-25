@@ -26,7 +26,7 @@ const mockPotensi: Potensi[] = [
     id: 'mock-p-2',
     nama_potensi: 'Jaka Garong (Jelajah Alam Kampung Garongan)',
     kategori: 'Jaka Garong',
-    deskripsi: 'Jaka Garong (Jelajah Alam Kampung Garongan) merupakan destinasi wisata alam yang berada di Dusun Garongan, Kalurahan Wonokerto, Kapanewon Turi, Kabupaten Sleman. Berlokasi di lereng Gunung Merapi dengan suasana pedesaan yang masih asri, Jaka Garong menawarkan udara sejuk, pemandangan alam yang indah, serta lingkungan yang nyaman untuk berbagai aktivitas luar ruang.',
+    deskripsi: 'Jaka Garong adalah destinasi wisata alam yang berada di Dusun Garongan, Kalurahan Wonokerto, Kapanewon Turi, Kabupaten Sleman. Berlokasi di lereng Gunung Merapi, kawasan ini menawarkan udara yang sejuk, pemandangan alam yang indah, serta suasana pedesaan yang masih alami.',
     foto_url: '/images/jakagarong/jakagarong-1.webp'
   }
 ];
