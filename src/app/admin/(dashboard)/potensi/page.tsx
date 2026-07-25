@@ -20,7 +20,7 @@ const mockPotensi: Potensi[] = [
     nama_potensi: 'Kelompok Wanita Tani (KWT)',
     kategori: 'KWT',
     deskripsi: 'Kelompok Wanita Tani (KWT) merupakan wadah pemberdayaan perempuan di Dusun Garongan yang berperan aktif dalam kegiatan pertanian dan pemanfaatan lahan pekarangan. Melalui berbagai kegiatan budidaya tanaman pangan, hortikultura, serta tanaman obat keluarga, KWT berupaya meningkatkan ketahanan pangan dan kesejahteraan keluarga.',
-    foto_url: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&q=80&w=800'
+    foto_url: '/images/kwt/kwt.jpeg'
   },
   {
     id: 'mock-p-2',

@@ -17,7 +17,7 @@ const mockActivities = [
     tanggal: '2026-07-10',
     deskripsi: 'Kelompok Wanita Tani (KWT) RT 01 melakukan panen bersama sayuran organik cabai, sawi, dan tomat di kebun percontohan dusun. Hasil panen dibagi rata untuk warga dan sebagian dipasarkan. Kegiatan ini bertujuan memperkuat ketahanan pangan warga lokal serta memberdayakan wanita tani dalam budidaya sayuran sehat bebas pestisida.',
     kegiatan_foto: [
-      { foto_url: 'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&q=80&w=800' },
+      { foto_url: '/images/kwt/kwt.jpeg' },
       { foto_url: 'https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?auto=format&fit=crop&q=80&w=800' },
       { foto_url: 'https://images.unsplash.com/photo-1595855759920-86582396756a?auto=format&fit=crop&q=80&w=800' }
     ]

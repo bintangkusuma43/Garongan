@@ -82,9 +82,7 @@ export default async function PotensiPage(props: { searchParams: Promise<SearchP
 
   // Compile top carousels (statically defined for core summaries)
   const kwtCarouselPhotos = [
-    'https://images.unsplash.com/photo-1595855759920-86582396756a?auto=format&fit=crop&q=80&w=800',
-    'https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?auto=format&fit=crop&q=80&w=800',
-    'https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&q=80&w=800'
+    '/images/kwt/kwt.jpeg'
   ];
 
   const jakaCarouselPhotos = [
