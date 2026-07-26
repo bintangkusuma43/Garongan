@@ -160,7 +160,7 @@ export default async function PotensiPage(props: { searchParams: Promise<SearchP
           /* KWT Tab Content */
           <div className="space-y-16 animate-fade-in-up">
             <div className="bg-white rounded-3xl border border-slate-200/60 p-6 lg:p-8 shadow-sm grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center hover-scale-glow transition-all">
-              <div className="lg:col-span-7 space-y-6">
+              <div className="order-2 lg:order-1 lg:col-span-7 space-y-6">
                 <div className="inline-flex items-center space-x-1.5 bg-[#F5F7F2] text-[#14532D] px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider border border-[#14532D]/5 shadow-xs">
                   <Award className="h-3.5 w-3.5 text-[#84CC16] animate-float" />
                   <span>Pemberdayaan Perempuan</span>
@@ -195,7 +195,7 @@ export default async function PotensiPage(props: { searchParams: Promise<SearchP
                 </div>
               </div>
 
-              <div className="lg:col-span-5">
+              <div className="order-1 lg:order-2 lg:col-span-5">
                 <div className="rounded-3xl overflow-hidden shadow-xl border-4 border-white ring-1 ring-slate-200 aspect-[4/3] relative bg-[#F5F7F2] hover-scale-glow transition-all duration-300">
                   <PhotoCarousel photos={kwtCarouselPhotos} alt="Kegiatan Pertanian KWT" />
                 </div>
@@ -214,7 +214,7 @@ export default async function PotensiPage(props: { searchParams: Promise<SearchP
                 <div className="space-y-10">
                   {kwtDbList.map((pot, idx) => (
                     <div key={pot.id} className="bg-white rounded-3xl border border-slate-200/60 p-6 lg:p-8 shadow-sm grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center hover-scale-glow transition-all duration-300">
-                      <div className="lg:col-span-7 space-y-5">
+                      <div className="order-2 lg:order-1 lg:col-span-7 space-y-5">
                         <div className="inline-flex items-center space-x-1.5 bg-[#F5F7F2] text-[#14532D] px-3.5 py-1.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider border border-[#14532D]/5">
                           <Leaf className="h-3 w-3 text-[#84CC16]" />
                           <span>Program KWT #{idx + 1}</span>
@@ -227,7 +227,7 @@ export default async function PotensiPage(props: { searchParams: Promise<SearchP
                         </p>
                       </div>
 
-                      <div className="lg:col-span-5">
+                      <div className="order-1 lg:order-2 lg:col-span-5">
                         <div className="rounded-2xl overflow-hidden shadow-md border border-slate-200/60 aspect-[4/3] relative bg-[#F5F7F2]">
                           <PhotoCarousel photos={getPhotos(pot.foto_url)} alt={pot.nama_potensi} />
                         </div>
@@ -244,7 +244,7 @@ export default async function PotensiPage(props: { searchParams: Promise<SearchP
           /* Jaka Garong Tab Content */
           <div className="space-y-16 animate-fade-in-up">
             <div className="bg-white rounded-3xl border border-slate-200/60 p-6 lg:p-8 shadow-sm grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center hover-scale-glow transition-all">
-              <div className="lg:col-span-7 space-y-6">
+              <div className="order-2 lg:order-1 lg:col-span-7 space-y-6">
                 <div className="inline-flex items-center space-x-1.5 bg-[#F5F7F2] text-[#14532D] px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider border border-[#14532D]/5 shadow-xs">
                   <Compass className="h-3.5 w-3.5 text-[#84CC16] animate-float" />
                   <span>Ekowisata & Petualangan</span>
@@ -299,7 +299,7 @@ export default async function PotensiPage(props: { searchParams: Promise<SearchP
                 </div>
               </div>
 
-              <div className="lg:col-span-5">
+              <div className="order-1 lg:order-2 lg:col-span-5">
                 <div className="rounded-3xl overflow-hidden shadow-xl border-4 border-white ring-1 ring-slate-200 aspect-[4/3] relative bg-[#F5F7F2] hover-scale-glow transition-all duration-300">
                   <PhotoCarousel photos={jakaCarouselPhotos} alt="Wisata Jaka Garong" />
                 </div>
@@ -318,7 +318,7 @@ export default async function PotensiPage(props: { searchParams: Promise<SearchP
                 <div className="space-y-10">
                   {jakaDbList.map((pot, idx) => (
                     <div key={pot.id} className="bg-white rounded-3xl border border-slate-200/60 p-6 lg:p-8 shadow-sm grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center hover-scale-glow transition-all duration-300">
-                      <div className="lg:col-span-7 space-y-5">
+                      <div className="order-2 lg:order-1 lg:col-span-7 space-y-5">
                         <div className="inline-flex items-center space-x-1.5 bg-[#F5F7F2] text-[#14532D] px-3.5 py-1.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider border border-[#14532D]/5">
                           <Tent className="h-3 w-3 text-[#84CC16]" />
                           <span>Fasilitas Jaka Garong #{idx + 1}</span>
@@ -331,7 +331,7 @@ export default async function PotensiPage(props: { searchParams: Promise<SearchP
                         </p>
                       </div>
 
-                      <div className="lg:col-span-5">
+                      <div className="order-1 lg:order-2 lg:col-span-5">
                         <div className="rounded-2xl overflow-hidden shadow-md border border-slate-200/60 aspect-[4/3] relative bg-[#F5F7F2]">
                           <PhotoCarousel photos={getPhotos(pot.foto_url)} alt={pot.nama_potensi} />
                         </div>
