@@ -4,7 +4,7 @@ export const dynamic = 'force-dynamic';
 
 import React from 'react';
 import Link from 'next/link';
-import { ArrowRight, Leaf, ShieldAlert, MapPin, Calendar, Compass, Users, Award, Tent, HelpCircle, GitBranch, BarChart3 } from 'lucide-react';
+import { ArrowRight, Leaf, ShieldAlert, MapPin, Calendar, Compass, Users, Award, Tent, HelpCircle, GitBranch, BarChart3, ZoomIn } from 'lucide-react';
 import { createClient } from '@/lib/supabase/server';
 import { HeroBackground } from '@/components/HeroBackground';
 import { ScrollReveal } from '@/components/ScrollReveal';
@@ -630,39 +630,50 @@ export default async function HomePage() {
               <div className="pt-4">
                 <Link
                   href="/mitigasi"
-                  className="inline-flex items-center space-x-2 px-7 py-4 bg-gradient-to-r from-[#84CC16] to-[#65a30d] hover:shadow-[0_0_25px_rgba(132,204,22,0.45)] hover:scale-105 text-[#14532D] rounded-2xl font-extrabold text-sm transition-all transform hover:-translate-y-0.5 duration-300 shadow-md"
+                  className="inline-flex items-center space-x-2 px-7 py-4 bg-gradient-to-r from-[#84CC16] to-[#65a30d] hover:shadow-[0_0_25px_rgba(132,204,22,0.45)] hover:scale-105 text-[#14532D] rounded-2xl font-extrabold text-sm transition-all transform hover:-translate-y-0.5 duration-300 shadow-md group"
                 >
-                  <span>Buka Peta Mitigasi</span>
-                  <ArrowRight className="h-4 w-4" />
+                  <span>Buka Peta & Panduan Lengkap</span>
+                  <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
                 </Link>
               </div>
             </div>
 
-            {/* Map Frame Illustration Column */}
+            {/* Map Frame Card Column (Displays Real Evacuation Map Image) */}
             <div className="lg:col-span-7">
-              <div className="bg-white/5 border border-white/10 p-3 rounded-3xl shadow-2xl relative overflow-hidden group">
-                <div className="aspect-[16/10] rounded-2xl overflow-hidden bg-[#166534]/50 flex flex-col justify-center items-center text-center p-6 relative">
-                  <div 
-                    className="absolute inset-0 bg-cover bg-center opacity-30 filter blur-xs group-hover:scale-105 transition-transform duration-1000" 
-                    style={{ backgroundImage: "url('https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&q=80&w=800')" }} 
+              <Link
+                href="/mitigasi"
+                className="block bg-white/10 border border-white/20 p-3 rounded-3xl shadow-2xl relative overflow-hidden group hover:border-[#84CC16]/60 transition-all duration-500 cursor-pointer"
+              >
+                <div className="aspect-[16/10] rounded-2xl overflow-hidden bg-[#14532D] relative flex items-center justify-center">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/images/dashboard/peta_jalur_evakuasi.webp"
+                    alt="Peta Rute Jalur Evakuasi RT 01 Garongan"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-90 group-hover:opacity-100"
                   />
-                  <div className="relative z-10 space-y-4">
-                    <div className="bg-[#84CC16]/20 border border-[#84CC16]/40 text-[#84CC16] p-4.5 rounded-full w-fit mx-auto animate-pulse-ring">
-                      <MapPin className="h-8 w-8" />
-                    </div>
-                    <h3 className="text-lg font-extrabold text-white tracking-wide font-heading">Peta Mitigasi & Kawasan Rawan Bencana</h3>
-                    <p className="text-xs text-white/80 max-w-sm mx-auto leading-relaxed font-sans font-semibold">
-                      Akses peta tata ruang rawan bencana erupsi Gunung Merapi serta rute jalur evakuasi keselamatan warga RT 01 Garongan.
+
+                  {/* Gradient Overlay for Text Readability */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/10 group-hover:from-black/75 transition-all duration-300" />
+
+                  {/* Badge top-left */}
+                  <div className="absolute top-4 left-4 bg-[#84CC16] text-[#14532D] text-[10px] uppercase font-extrabold tracking-wider px-3.5 py-1.5 rounded-lg shadow-md z-10">
+                    Peta Resmi RT 01
+                  </div>
+
+                  {/* Overlay Content */}
+                  <div className="absolute bottom-5 left-5 right-5 z-10 space-y-2 text-left">
+                    <h3 className="text-lg sm:text-xl font-extrabold text-white tracking-wide font-heading group-hover:text-[#84CC16] transition-colors flex items-center justify-between">
+                      <span>Peta Mitigasi & Jalur Evakuasi</span>
+                      <div className="bg-[#84CC16] text-[#14532D] p-2 rounded-xl group-hover:scale-110 transition-transform shadow">
+                        <ZoomIn className="h-4 w-4" />
+                      </div>
+                    </h3>
+                    <p className="text-xs text-white/80 leading-relaxed font-sans font-medium line-clamp-2">
+                      Rute jalur penyelamatan mandiri, titik kumpul aman, dan zonasi bahaya erupsi Merapi warga Dusun Garongan.
                     </p>
-                    <Link
-                      href="/mitigasi"
-                      className="inline-block px-5.5 py-3.5 bg-[#84CC16] text-[#14532D] hover:bg-[#84CC16]/95 hover:shadow-[0_0_15px_rgba(132,204,22,0.3)] hover:scale-105 rounded-xl text-xs font-extrabold transition-all shadow"
-                    >
-                      Buka Peta Mitigasi
-                    </Link>
                   </div>
                 </div>
-              </div>
+              </Link>
             </div>
 
             </div>
