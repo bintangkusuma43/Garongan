@@ -159,8 +159,9 @@ export default async function PotensiPage(props: { searchParams: Promise<SearchP
         {activeTab === 'kwt' && (
           /* KWT Tab Content */
           <div className="space-y-16 animate-fade-in-up">
-            <div className="bg-white rounded-3xl border border-slate-200/60 p-6 lg:p-8 shadow-sm grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center hover-scale-glow transition-all">
-              <div className="order-2 lg:order-1 lg:col-span-7 space-y-6">
+            <div className="bg-white rounded-3xl border border-slate-200/60 p-6 lg:p-8 shadow-sm flex flex-col lg:grid lg:grid-cols-12 gap-6 lg:gap-x-12 lg:gap-y-4 items-center lg:items-start hover-scale-glow transition-all">
+              {/* Title & Badge */}
+              <div className="order-1 lg:col-span-7 space-y-3 w-full">
                 <div className="inline-flex items-center space-x-1.5 bg-[#F5F7F2] text-[#14532D] px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider border border-[#14532D]/5 shadow-xs">
                   <Award className="h-3.5 w-3.5 text-[#84CC16] animate-float" />
                   <span>Pemberdayaan Perempuan</span>
@@ -168,11 +169,22 @@ export default async function PotensiPage(props: { searchParams: Promise<SearchP
                 <h2 className="text-3xl font-extrabold text-[#14532D] leading-tight font-heading">
                   Ketahanan Pangan Keluarga melalui Pertanian Pekarangan
                 </h2>
+              </div>
+
+              {/* Photo Carousel (Below Title on Mobile) */}
+              <div className="order-2 lg:col-span-5 lg:row-span-2 w-full">
+                <div className="rounded-3xl overflow-hidden shadow-xl border-4 border-white ring-1 ring-slate-200 aspect-[4/3] relative bg-[#F5F7F2] hover-scale-glow transition-all duration-300">
+                  <PhotoCarousel photos={kwtCarouselPhotos} alt="Kegiatan Pertanian KWT" />
+                </div>
+              </div>
+
+              {/* Description & Checklist (Below Photo on Mobile) */}
+              <div className="order-3 lg:col-span-7 space-y-6 w-full">
                 <p className="text-slate-600 leading-relaxed text-sm md:text-base font-sans font-medium whitespace-pre-line">
                   {kwtFallbackDesc}
                 </p>
                 
-                <div className="space-y-4 pt-4">
+                <div className="space-y-4 pt-2">
                   <h3 className="font-extrabold text-[#14532D] text-base font-heading">Fokus Hasil Pertanian & Kegiatan:</h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5 text-sm">
                     <div className="flex items-center space-x-3 bg-[#F5F7F2]/60 hover:bg-[#F5F7F2] p-4 rounded-2xl border border-slate-100/80 transition-all font-bold text-slate-700 hover:scale-102 transform duration-250 shadow-xs hover:shadow-sm">
@@ -194,12 +206,6 @@ export default async function PotensiPage(props: { searchParams: Promise<SearchP
                   </div>
                 </div>
               </div>
-
-              <div className="order-1 lg:order-2 lg:col-span-5">
-                <div className="rounded-3xl overflow-hidden shadow-xl border-4 border-white ring-1 ring-slate-200 aspect-[4/3] relative bg-[#F5F7F2] hover-scale-glow transition-all duration-300">
-                  <PhotoCarousel photos={kwtCarouselPhotos} alt="Kegiatan Pertanian KWT" />
-                </div>
-              </div>
             </div>
 
             {/* List of Admin-Input KWT Potential items */}
@@ -213,8 +219,9 @@ export default async function PotensiPage(props: { searchParams: Promise<SearchP
                 </div>
                 <div className="space-y-10">
                   {kwtDbList.map((pot, idx) => (
-                    <div key={pot.id} className="bg-white rounded-3xl border border-slate-200/60 p-6 lg:p-8 shadow-sm grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center hover-scale-glow transition-all duration-300">
-                      <div className="order-2 lg:order-1 lg:col-span-7 space-y-5">
+                    <div key={pot.id} className="bg-white rounded-3xl border border-slate-200/60 p-6 lg:p-8 shadow-sm flex flex-col lg:grid lg:grid-cols-12 gap-6 lg:gap-x-12 lg:gap-y-4 items-center lg:items-start hover-scale-glow transition-all duration-300">
+                      {/* Title & Badge */}
+                      <div className="order-1 lg:col-span-7 space-y-3 w-full">
                         <div className="inline-flex items-center space-x-1.5 bg-[#F5F7F2] text-[#14532D] px-3.5 py-1.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider border border-[#14532D]/5">
                           <Leaf className="h-3 w-3 text-[#84CC16]" />
                           <span>Program KWT #{idx + 1}</span>
@@ -222,15 +229,20 @@ export default async function PotensiPage(props: { searchParams: Promise<SearchP
                         <h3 className="text-2xl font-extrabold text-[#14532D] leading-tight font-heading">
                           {pot.nama_potensi}
                         </h3>
-                        <p className="text-slate-600 leading-relaxed text-sm md:text-base font-sans font-medium whitespace-pre-line">
-                          {pot.deskripsi}
-                        </p>
                       </div>
 
-                      <div className="order-1 lg:order-2 lg:col-span-5">
+                      {/* Photo Carousel */}
+                      <div className="order-2 lg:col-span-5 lg:row-span-2 w-full">
                         <div className="rounded-2xl overflow-hidden shadow-md border border-slate-200/60 aspect-[4/3] relative bg-[#F5F7F2]">
                           <PhotoCarousel photos={getPhotos(pot.foto_url)} alt={pot.nama_potensi} />
                         </div>
+                      </div>
+
+                      {/* Description */}
+                      <div className="order-3 lg:col-span-7 w-full">
+                        <p className="text-slate-600 leading-relaxed text-sm md:text-base font-sans font-medium whitespace-pre-line">
+                          {pot.deskripsi}
+                        </p>
                       </div>
                     </div>
                   ))}
@@ -243,8 +255,9 @@ export default async function PotensiPage(props: { searchParams: Promise<SearchP
         {activeTab === 'jakagarong' && (
           /* Jaka Garong Tab Content */
           <div className="space-y-16 animate-fade-in-up">
-            <div className="bg-white rounded-3xl border border-slate-200/60 p-6 lg:p-8 shadow-sm grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center hover-scale-glow transition-all">
-              <div className="order-2 lg:order-1 lg:col-span-7 space-y-6">
+            <div className="bg-white rounded-3xl border border-slate-200/60 p-6 lg:p-8 shadow-sm flex flex-col lg:grid lg:grid-cols-12 gap-6 lg:gap-x-12 lg:gap-y-4 items-center lg:items-start hover-scale-glow transition-all">
+              {/* Title & Badge */}
+              <div className="order-1 lg:col-span-7 space-y-3 w-full">
                 <div className="inline-flex items-center space-x-1.5 bg-[#F5F7F2] text-[#14532D] px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider border border-[#14532D]/5 shadow-xs">
                   <Compass className="h-3.5 w-3.5 text-[#84CC16] animate-float" />
                   <span>Ekowisata & Petualangan</span>
@@ -252,11 +265,22 @@ export default async function PotensiPage(props: { searchParams: Promise<SearchP
                 <h2 className="text-3xl font-extrabold text-[#14532D] leading-tight font-heading">
                   Wisata Edukasi Sungai dan Berkemah di Kaki Merapi
                 </h2>
+              </div>
+
+              {/* Photo Carousel */}
+              <div className="order-2 lg:col-span-5 lg:row-span-2 w-full">
+                <div className="rounded-3xl overflow-hidden shadow-xl border-4 border-white ring-1 ring-slate-200 aspect-[4/3] relative bg-[#F5F7F2] hover-scale-glow transition-all duration-300">
+                  <PhotoCarousel photos={jakaCarouselPhotos} alt="Wisata Jaka Garong" />
+                </div>
+              </div>
+
+              {/* Description & Facilities */}
+              <div className="order-3 lg:col-span-7 space-y-6 w-full">
                 <p className="text-slate-600 leading-relaxed text-sm md:text-base font-sans font-medium whitespace-pre-line">
                   {jakaGarongFallbackDesc}
                 </p>
                 
-                <div className="space-y-4 pt-4">
+                <div className="space-y-4 pt-2">
                   <h3 className="font-extrabold text-[#14532D] text-base font-heading">Fasilitas Utama Wisata:</h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="flex items-start space-x-4 bg-white p-5 rounded-2xl border border-slate-200/60 shadow-sm hover-scale-glow hover:border-[#14532D]/20 transition-all duration-300">
@@ -298,12 +322,6 @@ export default async function PotensiPage(props: { searchParams: Promise<SearchP
                   </div>
                 </div>
               </div>
-
-              <div className="order-1 lg:order-2 lg:col-span-5">
-                <div className="rounded-3xl overflow-hidden shadow-xl border-4 border-white ring-1 ring-slate-200 aspect-[4/3] relative bg-[#F5F7F2] hover-scale-glow transition-all duration-300">
-                  <PhotoCarousel photos={jakaCarouselPhotos} alt="Wisata Jaka Garong" />
-                </div>
-              </div>
             </div>
 
             {/* List of Admin-Input Jaka Garong Potential items */}
@@ -317,8 +335,9 @@ export default async function PotensiPage(props: { searchParams: Promise<SearchP
                 </div>
                 <div className="space-y-10">
                   {jakaDbList.map((pot, idx) => (
-                    <div key={pot.id} className="bg-white rounded-3xl border border-slate-200/60 p-6 lg:p-8 shadow-sm grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center hover-scale-glow transition-all duration-300">
-                      <div className="order-2 lg:order-1 lg:col-span-7 space-y-5">
+                    <div key={pot.id} className="bg-white rounded-3xl border border-slate-200/60 p-6 lg:p-8 shadow-sm flex flex-col lg:grid lg:grid-cols-12 gap-6 lg:gap-x-12 lg:gap-y-4 items-center lg:items-start hover-scale-glow transition-all duration-300">
+                      {/* Title & Badge */}
+                      <div className="order-1 lg:col-span-7 space-y-3 w-full">
                         <div className="inline-flex items-center space-x-1.5 bg-[#F5F7F2] text-[#14532D] px-3.5 py-1.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider border border-[#14532D]/5">
                           <Tent className="h-3 w-3 text-[#84CC16]" />
                           <span>Fasilitas Jaka Garong #{idx + 1}</span>
@@ -326,15 +345,20 @@ export default async function PotensiPage(props: { searchParams: Promise<SearchP
                         <h3 className="text-2xl font-extrabold text-[#14532D] leading-tight font-heading">
                           {pot.nama_potensi}
                         </h3>
-                        <p className="text-slate-600 leading-relaxed text-sm md:text-base font-sans font-medium whitespace-pre-line">
-                          {pot.deskripsi}
-                        </p>
                       </div>
 
-                      <div className="order-1 lg:order-2 lg:col-span-5">
+                      {/* Photo Carousel */}
+                      <div className="order-2 lg:col-span-5 lg:row-span-2 w-full">
                         <div className="rounded-2xl overflow-hidden shadow-md border border-slate-200/60 aspect-[4/3] relative bg-[#F5F7F2]">
                           <PhotoCarousel photos={getPhotos(pot.foto_url)} alt={pot.nama_potensi} />
                         </div>
+                      </div>
+
+                      {/* Description */}
+                      <div className="order-3 lg:col-span-7 w-full">
+                        <p className="text-slate-600 leading-relaxed text-sm md:text-base font-sans font-medium whitespace-pre-line">
+                          {pot.deskripsi}
+                        </p>
                       </div>
                     </div>
                   ))}
