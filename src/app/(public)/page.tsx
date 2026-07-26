@@ -429,7 +429,7 @@ export default async function HomePage() {
               <div className="h-76 overflow-hidden relative">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="https://images.unsplash.com/photo-1595855759920-86582396756a?auto=format&fit=crop&q=80&w=800"
+                  src="/images/kwt/kwt.jpeg"
                   alt="Aktivitas Pertanian KWT"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000"
                 />
