@@ -296,14 +296,14 @@ export default function MitigasiPage() {
                   {/* WhatsApp Lapor Bencana */}
                   <div className="border-b border-white/10 pb-3 space-y-1">
                     <div className="text-[10px] uppercase font-extrabold text-[#84CC16] tracking-wider flex items-center space-x-1.5">
-                      <MessageSquare className="h-3.5 w-3.5 text-emerald-400" />
+                      <MessageSquare className="h-3.5 w-3.5 text-[#84CC16]" />
                       <span>WhatsApp Lapor Bencana</span>
                     </div>
                     <a
                       href="https://wa.me/6282125101212"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-block text-xs font-extrabold text-emerald-300 hover:text-white underline tracking-wider pl-5 transition-colors"
+                      className="inline-block text-xs font-bold text-white hover:text-[#84CC16] underline decoration-[#84CC16]/70 underline-offset-4 tracking-wider pl-5 transition-colors"
                     >
                       082125101212 (WA)
                     </a>
