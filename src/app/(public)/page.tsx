@@ -697,7 +697,7 @@ export default async function HomePage() {
                   <div>
                     <h4 className="font-extrabold text-sm text-[#14532D] font-heading">Alamat Pengurus RT</h4>
                     <p className="text-xs sm:text-sm text-slate-500 mt-1 leading-relaxed font-sans font-medium">
-                      RT 01 / RW 20, Dusun Garongan, Wonokerto, Turi, Sleman, D.I. Yogyakarta, Indonesia (Kode Pos: 55551)
+                      RT 01 / RW 18, Dusun Garongan, Wonokerto, Turi, Sleman, D.I. Yogyakarta, Indonesia (Kode Pos: 55551)
                     </p>
                   </div>
                 </div>

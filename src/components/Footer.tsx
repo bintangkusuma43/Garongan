@@ -63,16 +63,16 @@ export default function Footer() {
               <div className="flex items-start space-x-3">
                 <MapPin className="h-5 w-5 text-[#84CC16] flex-shrink-0 mt-0.5" />
                 <span className="leading-relaxed">
-                  RT 01 / RW 20, Dusun Garongan, Wonokerto, Turi, Sleman, Daerah Istimewa Yogyakarta 55551
+                  RT 01 / RW 18, Dusun Garongan, Wonokerto, Turi, Sleman, Daerah Istimewa Yogyakarta 55551
                 </span>
               </div>
               <div className="flex items-center space-x-3">
                 <Phone className="h-4 w-4 text-[#84CC16] flex-shrink-0" />
-                <span>+62 812-3456-7890</span>
+                <span>087847651911</span>
               </div>
               <div className="flex items-center space-x-3">
                 <Mail className="h-4 w-4 text-[#84CC16] flex-shrink-0" />
-                <span>rt01.garongan@gmail.com</span>
+                <span>rizkysurya123@gmail.com</span>
               </div>
               <div className="flex items-center space-x-3">
                 <Clock className="h-4 w-4 text-[#84CC16] flex-shrink-0" />
