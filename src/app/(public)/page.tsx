@@ -8,6 +8,7 @@ import { ArrowRight, Leaf, ShieldAlert, MapPin, Calendar, Compass, Users, Award,
 import { createClient } from '@/lib/supabase/server';
 import { HeroBackground } from '@/components/HeroBackground';
 import { ScrollReveal } from '@/components/ScrollReveal';
+import { MitigasiMapPreview } from '@/components/MitigasiMapPreview';
 
 // Fallback mock data in case Supabase is empty or not yet connected
 const mockKegiatan = [
@@ -638,42 +639,9 @@ export default async function HomePage() {
               </div>
             </div>
 
-            {/* Map Frame Card Column (Displays Real Evacuation Map Image) */}
+            {/* Map Frame Card Column (Displays 2 Rotating Uncropped Maps) */}
             <div className="lg:col-span-7">
-              <Link
-                href="/mitigasi"
-                className="block bg-white/10 border border-white/20 p-3 rounded-3xl shadow-2xl relative overflow-hidden group hover:border-[#84CC16]/60 transition-all duration-500 cursor-pointer"
-              >
-                <div className="aspect-[16/10] rounded-2xl overflow-hidden bg-[#14532D] relative flex items-center justify-center">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src="/images/dashboard/peta_jalur_evakuasi.webp"
-                    alt="Peta Rute Jalur Evakuasi RT 01 Garongan"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-90 group-hover:opacity-100"
-                  />
-
-                  {/* Gradient Overlay for Text Readability */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-black/10 group-hover:from-black/75 transition-all duration-300" />
-
-                  {/* Badge top-left */}
-                  <div className="absolute top-4 left-4 bg-[#84CC16] text-[#14532D] text-[10px] uppercase font-extrabold tracking-wider px-3.5 py-1.5 rounded-lg shadow-md z-10">
-                    Peta Resmi RT 01
-                  </div>
-
-                  {/* Overlay Content */}
-                  <div className="absolute bottom-5 left-5 right-5 z-10 space-y-2 text-left">
-                    <h3 className="text-lg sm:text-xl font-extrabold text-white tracking-wide font-heading group-hover:text-[#84CC16] transition-colors flex items-center justify-between">
-                      <span>Peta Mitigasi & Jalur Evakuasi</span>
-                      <div className="bg-[#84CC16] text-[#14532D] p-2 rounded-xl group-hover:scale-110 transition-transform shadow">
-                        <ZoomIn className="h-4 w-4" />
-                      </div>
-                    </h3>
-                    <p className="text-xs text-white/80 leading-relaxed font-sans font-medium line-clamp-2">
-                      Rute jalur penyelamatan mandiri, titik kumpul aman, dan zonasi bahaya erupsi Merapi warga Dusun Garongan.
-                    </p>
-                  </div>
-                </div>
-              </Link>
+              <MitigasiMapPreview />
             </div>
 
             </div>
