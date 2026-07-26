@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { ShieldAlert, Phone, HelpCircle, Eye, X, ZoomIn } from 'lucide-react';
+import { ShieldAlert, Phone, HelpCircle, Eye, X, ZoomIn, Landmark, Radio, MessageSquare } from 'lucide-react';
 import { ScrollReveal } from '@/components/ScrollReveal';
 
 export default function MitigasiPage() {
@@ -259,23 +259,65 @@ export default function MitigasiPage() {
           <ScrollReveal delay={200}>
             <div className="space-y-6">
               {/* Emergency contacts card */}
-              <div className="bg-gradient-to-br from-[#14532D] via-[#114022] to-[#166534] text-white p-8 rounded-3xl shadow-xl border border-white/5 space-y-5 hover-glow duration-300">
-                <h4 className="font-extrabold text-sm flex items-center space-x-2 tracking-wide uppercase">
-                  <Phone className="h-4.5 w-4.5 text-[#84CC16] animate-float" />
-                  <span>Kontak Darurat Bencana</span>
-                </h4>
-                <div className="space-y-3.5 text-xs text-emerald-100/90 font-sans font-medium">
-                  <div className="flex justify-between border-b border-white/10 pb-2.5">
-                    <span>Posko Merapi Wonokerto:</span>
-                    <span className="font-bold text-white tracking-wider">+62 811-2233-445</span>
+              <div className="bg-gradient-to-br from-[#14532D] via-[#114022] to-[#166534] text-white p-7 rounded-3xl shadow-xl border border-white/10 space-y-5 hover-glow duration-300">
+                <div>
+                  <h4 className="font-extrabold text-sm flex items-center space-x-2 tracking-wide uppercase">
+                    <Phone className="h-4.5 w-4.5 text-[#84CC16] animate-float flex-shrink-0" />
+                    <span>Kontak Darurat Bencana</span>
+                  </h4>
+                  <p className="text-[11px] text-emerald-100/70 font-sans mt-1">
+                    Badan Penanggulangan Bencana Daerah (BPBD) Kab. Sleman
+                  </p>
+                </div>
+
+                <div className="space-y-3.5 text-xs font-sans font-medium">
+                  {/* Kantor BPBD Sleman */}
+                  <div className="border-b border-white/10 pb-3 space-y-1">
+                    <div className="text-[10px] uppercase font-extrabold text-[#84CC16] tracking-wider flex items-center space-x-1.5">
+                      <Landmark className="h-3.5 w-3.5" />
+                      <span>Kantor BPBD Kab. Sleman</span>
+                    </div>
+                    <div className="text-sm font-bold text-white tracking-wider pl-5">
+                      (0274) 868504
+                    </div>
                   </div>
-                  <div className="flex justify-between border-b border-white/10 pb-2.5">
-                    <span>BPBD Sleman:</span>
-                    <span className="font-bold text-white tracking-wider">(0274) 868500</span>
+
+                  {/* Lapor Bencana Telepon */}
+                  <div className="border-b border-white/10 pb-3 space-y-1">
+                    <div className="text-[10px] uppercase font-extrabold text-[#84CC16] tracking-wider flex items-center space-x-1.5">
+                      <Phone className="h-3.5 w-3.5" />
+                      <span>Posko Lapor Bencana</span>
+                    </div>
+                    <div className="text-xs font-bold text-white tracking-wider pl-5">
+                      0274-898350 / 2860051
+                    </div>
                   </div>
-                  <div className="flex justify-between pb-1">
-                    <span>Ambulans RT 01:</span>
-                    <span className="font-bold text-white tracking-wider">+62 812-3456-7890</span>
+
+                  {/* WhatsApp Lapor Bencana */}
+                  <div className="border-b border-white/10 pb-3 space-y-1">
+                    <div className="text-[10px] uppercase font-extrabold text-[#84CC16] tracking-wider flex items-center space-x-1.5">
+                      <MessageSquare className="h-3.5 w-3.5 text-emerald-400" />
+                      <span>WhatsApp Lapor Bencana</span>
+                    </div>
+                    <a
+                      href="https://wa.me/6282125101212"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block text-xs font-extrabold text-emerald-300 hover:text-white underline tracking-wider pl-5 transition-colors"
+                    >
+                      082125101212 (WA)
+                    </a>
+                  </div>
+
+                  {/* Radio Frequency HT */}
+                  <div className="space-y-1 pt-0.5">
+                    <div className="text-[10px] uppercase font-extrabold text-[#84CC16] tracking-wider flex items-center space-x-1.5">
+                      <Radio className="h-3.5 w-3.5" />
+                      <span>Frekuensi Radio HT</span>
+                    </div>
+                    <div className="text-xs font-extrabold text-white tracking-wider pl-5 font-mono bg-white/15 px-3 py-1.5 rounded-xl w-fit border border-white/10">
+                      159.800 MHz
+                    </div>
                   </div>
                 </div>
               </div>
