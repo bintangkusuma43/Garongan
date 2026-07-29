@@ -4,7 +4,7 @@ export const dynamic = 'force-dynamic';
 
 import React from 'react';
 import Link from 'next/link';
-import { Calendar, Filter, ArrowRight, Sparkles } from 'lucide-react';
+import { Calendar, Filter, ArrowRight, Sparkles, FolderArchive } from 'lucide-react';
 import { createClient } from '@/lib/supabase/server';
 
 interface SearchParams {
@@ -18,13 +18,24 @@ export const metadata = {
 
 const categories = ['Semua', 'KWT', 'Pemuda', 'Posyandu', 'PKK', 'Masyarakat', 'Lainnya'];
 
-const mockActivities = [
+interface Activity {
+  id: string;
+  judul: string;
+  kategori: string;
+  tanggal: string;
+  deskripsi: string;
+  drive_url?: string;
+  kegiatan_foto: { foto_url: string }[];
+}
+
+const mockActivities: Activity[] = [
   {
     id: 'mock-1',
     judul: 'Panen Perdana Hortikultura KWT Garongan',
     kategori: 'KWT',
     tanggal: '2026-07-10',
     deskripsi: 'Kelompok Wanita Tani (KWT) RT 01 melakukan panen bersama sayuran organik cabai, sawi, dan tomat di kebun percontohan dusun. Hasil panen dibagi rata untuk warga dan sebagian dipasarkan.',
+    drive_url: 'https://drive.google.com/',
     kegiatan_foto: [{ foto_url: '/images/kwt/kwt.jpeg' }]
   },
   {
@@ -72,7 +83,7 @@ export default async function GaleriPage(props: { searchParams: Promise<SearchPa
     const supabase = await createClient();
     const { data, error } = await supabase
       .from('kegiatan')
-      .select('id, judul, deskripsi, kategori, tanggal, kegiatan_foto(foto_url)')
+      .select('id, judul, deskripsi, kategori, tanggal, drive_url, kegiatan_foto(foto_url)')
       .order('tanggal', { ascending: false });
 
     if (error) {
@@ -85,6 +96,7 @@ export default async function GaleriPage(props: { searchParams: Promise<SearchPa
         kategori: item.kategori,
         tanggal: item.tanggal,
         deskripsi: item.deskripsi,
+        drive_url: item.drive_url,
         kegiatan_foto: item.kegiatan_foto && item.kegiatan_foto.length > 0 
           ? item.kegiatan_foto 
           : [{ foto_url: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=800' }]
@@ -167,9 +179,15 @@ export default async function GaleriPage(props: { searchParams: Promise<SearchPa
                   alt={act.judul}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 />
-                <div className="absolute top-4 left-4 bg-[#14532D] text-white text-[10px] uppercase font-bold tracking-wider px-2.5 py-1 rounded-lg">
+                <div className="absolute top-4 left-4 bg-[#14532D] text-white text-[10px] uppercase font-bold tracking-wider px-2.5 py-1 rounded-lg shadow-sm">
                   {act.kategori}
                 </div>
+                {act.drive_url && (
+                  <div className="absolute top-4 right-4 bg-[#14532D]/90 text-white text-[10px] font-extrabold px-2.5 py-1 rounded-lg backdrop-blur-sm flex items-center space-x-1 border border-white/20 shadow-sm">
+                    <FolderArchive className="h-3 w-3 text-[#84CC16]" />
+                    <span>Drive</span>
+                  </div>
+                )}
               </div>
 
               <div className="p-6 flex-grow flex flex-col justify-between space-y-4">

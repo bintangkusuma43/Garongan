@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { Calendar, ChevronLeft, Tag } from 'lucide-react';
+import { Calendar, ChevronLeft, Tag, FolderArchive, ExternalLink } from 'lucide-react';
 import { createClient } from '@/lib/supabase/server';
 import ImageGallery from '@/components/ImageGallery';
 
@@ -9,13 +9,24 @@ interface PageProps {
   params: Promise<{ id: string }>;
 }
 
-const mockActivities = [
+interface Activity {
+  id: string;
+  judul: string;
+  kategori: string;
+  tanggal: string;
+  deskripsi: string;
+  drive_url?: string;
+  kegiatan_foto: { foto_url: string }[];
+}
+
+const mockActivities: Activity[] = [
   {
     id: 'mock-1',
     judul: 'Panen Perdana Hortikultura KWT Garongan',
     kategori: 'KWT',
     tanggal: '2026-07-10',
     deskripsi: 'Kelompok Wanita Tani (KWT) RT 01 melakukan panen bersama sayuran organik cabai, sawi, dan tomat di kebun percontohan dusun. Hasil panen dibagi rata untuk warga dan sebagian dipasarkan. Kegiatan ini bertujuan memperkuat ketahanan pangan warga lokal serta memberdayakan wanita tani dalam budidaya sayuran sehat bebas pestisida.',
+    drive_url: 'https://drive.google.com/',
     kegiatan_foto: [
       { foto_url: '/images/kwt/kwt.jpeg' },
       { foto_url: 'https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?auto=format&fit=crop&q=80&w=800' },
@@ -83,7 +94,7 @@ export default async function GaleriDetailPage({ params }: PageProps) {
       const supabase = await createClient();
       const { data, error } = await supabase
         .from('kegiatan')
-        .select('id, judul, deskripsi, kategori, tanggal, kegiatan_foto(foto_url)')
+        .select('id, judul, deskripsi, kategori, tanggal, drive_url, kegiatan_foto(foto_url)')
         .eq('id', id)
         .single();
 
@@ -94,6 +105,7 @@ export default async function GaleriDetailPage({ params }: PageProps) {
           kategori: data.kategori,
           tanggal: data.tanggal,
           deskripsi: data.deskripsi,
+          drive_url: data.drive_url,
           kegiatan_foto: data.kegiatan_foto && data.kegiatan_foto.length > 0 
             ? data.kegiatan_foto 
             : [{ foto_url: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=800' }]
@@ -127,12 +139,12 @@ export default async function GaleriDetailPage({ params }: PageProps) {
       <div className="bg-white rounded-3xl border border-border shadow-sm overflow-hidden p-6 sm:p-8 space-y-6">
         
         {/* Photo Gallery Component */}
-        <ImageGallery photos={activity.kegiatan_foto} />
+        <ImageGallery photos={activity.kegiatan_foto} driveUrl={activity.drive_url} />
 
         {/* Info Text */}
         <div className="space-y-4 pt-4 border-t border-border">
           
-          <div className="flex flex-wrap items-center gap-4 text-xs">
+          <div className="flex flex-wrap items-center gap-3 text-xs">
             <span className="inline-flex items-center space-x-1 bg-primary text-white px-2.5 py-1 rounded-md font-bold">
               <Tag className="h-3 w-3" />
               <span>{activity.kategori}</span>
@@ -147,6 +159,19 @@ export default async function GaleriDetailPage({ params }: PageProps) {
                 })}
               </span>
             </span>
+
+            {activity.drive_url && (
+              <a
+                href={activity.drive_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center space-x-1.5 bg-[#14532D] hover:bg-[#166534] text-white px-3 py-1 rounded-md font-bold text-xs transition-all shadow-xs hover:scale-105 group"
+              >
+                <FolderArchive className="h-3.5 w-3.5 text-[#84CC16]" />
+                <span>Google Drive Album</span>
+                <ExternalLink className="h-3 w-3 text-[#84CC16] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              </a>
+            )}
           </div>
 
           <h1 className="text-2xl sm:text-3xl font-extrabold text-primary leading-tight">

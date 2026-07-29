@@ -11,7 +11,9 @@ import {
   Calendar as CalendarIcon, 
   Check, 
   AlertCircle,
-  X
+  X,
+  FolderArchive,
+  ExternalLink
 } from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
 import { convertAndCompressToWebp } from '@/lib/imageConverter';
@@ -22,6 +24,7 @@ interface Kegiatan {
   deskripsi: string;
   kategori: 'KWT' | 'Pemuda' | 'Posyandu' | 'PKK' | 'Masyarakat' | 'Lainnya';
   tanggal: string;
+  drive_url?: string;
   kegiatan_foto?: { id?: string; foto_url: string }[];
 }
 
@@ -56,6 +59,7 @@ export default function AdminKegiatanPage() {
   const [deskripsi, setDeskripsi] = useState('');
   const [kategori, setKategori] = useState<Kegiatan['kategori']>('Lainnya');
   const [tanggal, setTanggal] = useState('');
+  const [driveUrl, setDriveUrl] = useState('');
   
   // Upload State
   const [uploadFiles, setUploadFiles] = useState<FileList | null>(null);
@@ -101,6 +105,7 @@ export default function AdminKegiatanPage() {
     setDeskripsi('');
     setKategori('Lainnya');
     setTanggal(new Date().toISOString().split('T')[0]);
+    setDriveUrl('');
     setExistingPhotos([]);
     setUploadFiles(null);
     setFormOpen(true);
@@ -113,6 +118,7 @@ export default function AdminKegiatanPage() {
     setDeskripsi(keg.deskripsi);
     setKategori(keg.kategori);
     setTanggal(keg.tanggal);
+    setDriveUrl(keg.drive_url || '');
     setExistingPhotos(keg.kegiatan_foto || []);
     setUploadFiles(null);
     setFormOpen(true);
@@ -200,17 +206,19 @@ export default function AdminKegiatanPage() {
         ...uploadedUrls.map(url => ({ foto_url: url }))
       ];
 
+      const driveUrlTrimmed = driveUrl.trim() || undefined;
+
       if (editingId) {
         // UPDATE MODE
         if (editingId.startsWith('mock-')) {
           setKegiatanList(prev => prev.map(k => k.id === editingId ? {
-            ...k, judul, deskripsi, kategori, tanggal, kegiatan_foto: allPhotos
+            ...k, judul, deskripsi, kategori, tanggal, drive_url: driveUrlTrimmed, kegiatan_foto: allPhotos
           } : k));
         } else {
           // Update kegiatan table
           const { error } = await supabase
             .from('kegiatan')
-            .update({ judul, deskripsi, kategori, tanggal })
+            .update({ judul, deskripsi, kategori, tanggal, drive_url: driveUrlTrimmed })
             .eq('id', editingId);
           if (error) throw error;
 
@@ -234,6 +242,7 @@ export default function AdminKegiatanPage() {
             deskripsi,
             kategori,
             tanggal,
+            drive_url: driveUrlTrimmed,
             kegiatan_foto: allPhotos.length > 0 ? allPhotos : [{ foto_url: 'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&q=80&w=800' }]
           };
           setKegiatanList(prev => [mockNew, ...prev]);
@@ -241,7 +250,7 @@ export default function AdminKegiatanPage() {
           // Supabase Insert
           const { data, error } = await supabase
             .from('kegiatan')
-            .insert([{ judul, deskripsi, kategori, tanggal }])
+            .insert([{ judul, deskripsi, kategori, tanggal, drive_url: driveUrlTrimmed }])
             .select()
             .single();
           if (error) throw error;
@@ -354,8 +363,24 @@ export default function AdminKegiatanPage() {
                 />
               </div>
 
+              {/* Link Google Drive */}
+              <div className="space-y-1 col-span-1 sm:col-span-2">
+                <label className="block text-primary flex items-center space-x-1.5 text-xs font-bold uppercase tracking-wider">
+                  <FolderArchive className="h-3.5 w-3.5 text-[#84CC16]" />
+                  <span>Link Google Drive Album / Foto Full Resolusi (Opsional)</span>
+                </label>
+                <input
+                  type="url"
+                  value={driveUrl}
+                  onChange={(e) => setDriveUrl(e.target.value)}
+                  placeholder="https://drive.google.com/drive/folders/..."
+                  className="w-full px-4 py-2.5 rounded-xl border border-border text-foreground font-normal outline-none focus:border-primary text-xs sm:text-sm"
+                />
+                <p className="text-[11px] text-slate-500 font-medium">Masukkan link folder Google Drive publik agar warga dapat mengunduh foto resolusi tinggi.</p>
+              </div>
+
               {/* Photo Upload */}
-              <div className="space-y-1">
+              <div className="space-y-1 col-span-1 sm:col-span-2">
                 <label className="block text-primary">Upload Foto Baru (Dapat memilih beberapa)</label>
                 <input
                   type="file"

@@ -1,13 +1,14 @@
 'use client';
 
 import React, { useState } from 'react';
-import { ChevronLeft, ChevronRight, X, Maximize2 } from 'lucide-react';
+import { ChevronLeft, ChevronRight, X, Maximize2, FolderArchive, ExternalLink } from 'lucide-react';
 
 interface ImageGalleryProps {
   photos: { foto_url: string }[];
+  driveUrl?: string;
 }
 
-export default function ImageGallery({ photos }: ImageGalleryProps) {
+export default function ImageGallery({ photos, driveUrl }: ImageGalleryProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -36,6 +37,21 @@ export default function ImageGallery({ photos }: ImageGalleryProps) {
         onClick={() => setIsOpen(true)}
         className="relative aspect-[16/9] rounded-3xl overflow-hidden border border-slate-200/80 shadow-md bg-[#F5F7F2] group cursor-zoom-in"
       >
+        {/* Drive Overlay Badge */}
+        {driveUrl && (
+          <a
+            href={driveUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
+            className="absolute top-4 right-4 z-20 bg-[#14532D]/90 hover:bg-[#14532D] text-white text-[11px] font-extrabold px-3 py-1.5 rounded-xl border border-white/20 shadow-md backdrop-blur-sm flex items-center space-x-1.5 transition-all hover:scale-105 group/drive"
+          >
+            <FolderArchive className="h-3.5 w-3.5 text-[#84CC16]" />
+            <span>Album Google Drive</span>
+            <ExternalLink className="h-3 w-3 text-[#84CC16] group-hover/drive:translate-x-0.5 group-hover/drive:-translate-y-0.5 transition-transform" />
+          </a>
+        )}
+
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={photos[activeIndex].foto_url}
