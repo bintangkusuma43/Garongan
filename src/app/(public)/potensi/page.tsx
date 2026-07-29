@@ -3,7 +3,7 @@
 export const dynamic = 'force-dynamic';
 
 import React from 'react';
-import { Leaf, Tent, Compass, Sparkles, Award, CheckCircle, MapPin } from 'lucide-react';
+import { Leaf, Tent, Compass, Sparkles, Award, CheckCircle, MapPin, Globe, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
 import { createClient } from '@/lib/supabase/server';
 import { PhotoCarousel } from '@/components/PhotoCarousel';
@@ -258,9 +258,21 @@ export default async function PotensiPage(props: { searchParams: Promise<SearchP
             <div className="bg-white rounded-3xl border border-slate-200/60 p-6 lg:p-8 shadow-sm flex flex-col lg:grid lg:grid-cols-12 gap-6 lg:gap-x-12 lg:gap-y-4 items-center lg:items-start hover-scale-glow transition-all">
               {/* Title & Badge */}
               <div className="order-1 lg:col-span-7 space-y-3 w-full">
-                <div className="inline-flex items-center space-x-1.5 bg-[#F5F7F2] text-[#14532D] px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider border border-[#14532D]/5 shadow-xs">
-                  <Compass className="h-3.5 w-3.5 text-[#84CC16] animate-float" />
-                  <span>Ekowisata & Petualangan</span>
+                <div className="flex flex-wrap items-center gap-2.5">
+                  <div className="inline-flex items-center space-x-1.5 bg-[#F5F7F2] text-[#14532D] px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider border border-[#14532D]/5 shadow-xs">
+                    <Compass className="h-3.5 w-3.5 text-[#84CC16] animate-float" />
+                    <span>Ekowisata & Petualangan</span>
+                  </div>
+                  <a
+                    href="https://jakagarong.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center space-x-1.5 bg-[#14532D] text-white hover:bg-[#166534] px-4 py-2 rounded-full text-xs font-extrabold tracking-wide border border-[#14532D] shadow-xs transition-all hover:scale-105 group"
+                  >
+                    <Globe className="h-3.5 w-3.5 text-[#84CC16]" />
+                    <span>jakagarong.com</span>
+                    <ExternalLink className="h-3 w-3 text-[#84CC16] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                  </a>
                 </div>
                 <h2 className="text-3xl font-extrabold text-[#14532D] leading-tight font-heading">
                   Wisata Edukasi Sungai dan Berkemah di Kaki Merapi
@@ -319,6 +331,33 @@ export default async function PotensiPage(props: { searchParams: Promise<SearchP
                         <p className="text-[11px] text-slate-500 mt-1 leading-relaxed font-semibold">Pendopo joglo tradisional untuk berkumpul, dilengkapi sarana MCK lengkap.</p>
                       </div>
                     </div>
+
+                    {/* Official Website CTA Card inside facility grid */}
+                    <a
+                      href="https://jakagarong.com/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-start space-x-4 bg-gradient-to-r from-[#14532D] via-[#166534] to-[#14532D] text-white p-5 rounded-2xl border border-[#14532D] shadow-md hover-scale-glow hover:shadow-xl transition-all duration-300 group sm:col-span-2"
+                    >
+                      <div className="bg-white/10 p-2.5 rounded-xl border border-white/20 flex-shrink-0 group-hover:scale-110 group-hover:bg-[#84CC16] group-hover:text-[#14532D] transition-all">
+                        <Globe className="h-5.5 w-5.5 text-[#84CC16] group-hover:text-[#14532D]" />
+                      </div>
+                      <div className="flex-grow flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                        <div>
+                          <h4 className="font-extrabold text-white text-sm font-heading flex items-center space-x-1.5">
+                            <span>Website Resmi Wisata Jaka Garong</span>
+                            <ExternalLink className="h-3.5 w-3.5 text-[#84CC16]" />
+                          </h4>
+                          <p className="text-[11px] text-white/80 mt-0.5 leading-relaxed font-semibold">
+                            Kunjungi jakagarong.com untuk reservasi, booking camping ground, & layanan paket wisata.
+                          </p>
+                        </div>
+                        <span className="inline-flex items-center space-x-1 text-xs font-extrabold bg-[#84CC16] text-[#14532D] px-3.5 py-1.5 rounded-xl flex-shrink-0 group-hover:bg-white transition-colors shadow">
+                          <span>Buka Website</span>
+                          <ExternalLink className="h-3 w-3" />
+                        </span>
+                      </div>
+                    </a>
                   </div>
                 </div>
               </div>

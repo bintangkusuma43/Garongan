@@ -4,7 +4,7 @@ export const dynamic = 'force-dynamic';
 
 import React from 'react';
 import Link from 'next/link';
-import { ArrowRight, Leaf, ShieldAlert, MapPin, Calendar, Compass, Users, Award, Tent, HelpCircle, GitBranch, BarChart3, ZoomIn } from 'lucide-react';
+import { ArrowRight, Leaf, ShieldAlert, MapPin, Calendar, Compass, Users, Award, Tent, HelpCircle, GitBranch, BarChart3, ZoomIn, Globe, ExternalLink } from 'lucide-react';
 import { createClient } from '@/lib/supabase/server';
 import { HeroBackground } from '@/components/HeroBackground';
 import { ScrollReveal } from '@/components/ScrollReveal';
@@ -487,11 +487,20 @@ export default async function HomePage() {
                   </p>
                 </div>
                 
-                <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
-                  <span className="text-xs font-extrabold text-[#6B7280]">Camping & Outbound</span>
+                <div className="pt-4 border-t border-slate-100 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+                  <a
+                    href="https://jakagarong.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center space-x-1.5 text-xs font-extrabold text-[#14532D] hover:text-[#166534] hover:underline"
+                  >
+                    <Globe className="h-4 w-4 text-[#84CC16]" />
+                    <span>jakagarong.com</span>
+                    <ExternalLink className="h-3 w-3 text-slate-400" />
+                  </a>
                   <Link
                     href="/potensi?tab=jakagarong"
-                    className="inline-flex items-center space-x-1.5 px-6 py-3.5 bg-gradient-to-r from-[#14532D] to-[#166534] hover:shadow-[0_0_20px_rgba(20,83,45,0.35)] hover:scale-105 text-white rounded-2xl text-xs font-extrabold transition-all shadow group"
+                    className="inline-flex items-center justify-center space-x-1.5 px-6 py-3.5 bg-gradient-to-r from-[#14532D] to-[#166534] hover:shadow-[0_0_20px_rgba(20,83,45,0.35)] hover:scale-105 text-white rounded-2xl text-xs font-extrabold transition-all shadow group"
                   >
                     <span>Detail Jaka Garong</span>
                     <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform duration-300" />
