@@ -33,13 +33,23 @@ export default function AdminLoginPage() {
     const isOfflineMode = !process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
     if (isOfflineMode) {
-      // Simulate successful login if offline mock credentials match
-      if (email === 'admin@garongan.id' && password === 'admin123') {
+      const validOfflineAccounts = [
+        { email: 'admin@garongan.id', pass: 'admin123' },
+        { email: 'rt@garongan.id', pass: 'GaronganRT01#2026' },
+        { email: 'pemuda@garongan.id', pass: 'PemudaGarongan#2026' },
+        { email: 'sekretaris@garongan.id', pass: 'SekretarisGarongan#2026' },
+      ];
+
+      const match = validOfflineAccounts.find(
+        acc => acc.email.toLowerCase() === email.trim().toLowerCase() && acc.pass === password
+      );
+
+      if (match) {
         document.cookie = "mock-session=true; path=/; max-age=86400";
         router.push('/admin/dashboard');
         router.refresh();
       } else {
-        setErrorMsg('Email atau password salah! Gunakan: admin@garongan.id / admin123 untuk mode offline.');
+        setErrorMsg('Email atau password salah! Silakan periksa kembali email dan password admin Anda.');
         setLoading(false);
       }
       return;
@@ -146,20 +156,20 @@ export default function AdminLoginPage() {
           </button>
         </form>
 
-        {/* Credentials hints (optional but super helpful) */}
+        {/* Credentials hints */}
         <div className="pt-4 border-t border-border text-center space-y-1">
           {isOffline ? (
             <div className="bg-amber-50 border border-amber-200 p-3.5 rounded-xl text-[10px] text-amber-800 font-semibold leading-relaxed text-left space-y-1">
-              <span className="block font-bold">💡 Mode Offline Aktif</span>
-              <span className="block">Gunakan kredensial pengujian berikut untuk login:</span>
-              <div className="bg-white/60 p-2 rounded border border-amber-100 font-mono text-[9px] mt-1 space-y-0.5">
-                <div>Email: <span className="font-bold">admin@garongan.id</span></div>
-                <div>Pass: <span className="font-bold">admin123</span></div>
+              <span className="block font-bold">💡 Mode Offline Aktif (Akun Penguji):</span>
+              <div className="bg-white/60 p-2 rounded border border-amber-100 font-mono text-[9px] mt-1 space-y-1">
+                <div>1. Pak RT: <span className="font-bold">rt@garongan.id</span> / <span className="font-bold">GaronganRT01#2026</span></div>
+                <div>2. Pemuda: <span className="font-bold">pemuda@garongan.id</span> / <span className="font-bold">PemudaGarongan#2026</span></div>
+                <div>3. Sekretaris: <span className="font-bold">sekretaris@garongan.id</span> / <span className="font-bold">SekretarisGarongan#2026</span></div>
               </div>
             </div>
           ) : (
             <p className="text-[10px] text-muted leading-relaxed">
-              * Masuk menggunakan akun admin yang terdaftar di database Supabase Auth Anda.
+              * Masuk menggunakan akun admin terdaftar (Pak RT, Pemuda, Sekretaris) di Supabase Auth.
             </p>
           )}
         </div>
