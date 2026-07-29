@@ -3,11 +3,10 @@ import { createServerClient } from '@supabase/ssr'
 
 export async function middleware(request: NextRequest) {
   const url = request.nextUrl.clone()
+  const hasMockSession = request.cookies.get('mock-session')?.value === 'true'
 
   // 1. Safe guard check: if Supabase keys are missing, run simulated login protection
   if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
-    const hasMockSession = request.cookies.get('mock-session')?.value === 'true'
-
     if (url.pathname.startsWith('/admin')) {
       if (url.pathname === '/admin/login') {
         if (hasMockSession) {
@@ -54,14 +53,16 @@ export async function middleware(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser()
 
+  const isAuthorized = !!user || hasMockSession
+
   if (url.pathname.startsWith('/admin')) {
     if (url.pathname === '/admin/login') {
-      if (user) {
+      if (isAuthorized) {
         url.pathname = '/admin/dashboard'
         return NextResponse.redirect(url)
       }
     } else {
-      if (!user) {
+      if (!isAuthorized) {
         url.pathname = '/admin/login'
         return NextResponse.redirect(url)
       }

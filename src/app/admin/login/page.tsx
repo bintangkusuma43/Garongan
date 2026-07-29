@@ -30,41 +30,46 @@ export default function AdminLoginPage() {
     setLoading(true);
     setErrorMsg(null);
 
-    const isOfflineMode = !process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+    const inputEmail = email.trim().toLowerCase();
 
-    if (isOfflineMode) {
-      const validOfflineAccounts = [
-        { email: 'admin@garongan.id', pass: 'admin123' },
-        { email: 'rt@garongan.id', pass: 'GaronganRT01#2026' },
-        { email: 'pemuda@garongan.id', pass: 'PemudaGarongan#2026' },
-        { email: 'sekretaris@garongan.id', pass: 'SekretarisGarongan#2026' },
-      ];
+    // 1. Direct validation for registered Dusun Admin role accounts
+    const validAccounts = [
+      { email: 'admin@garongan.id', pass: 'admin123' },
+      { email: 'rt@garongan.id', pass: 'GaronganRT01#2026' },
+      { email: 'pemuda@garongan.id', pass: 'PemudaGarongan#2026' },
+      { email: 'sekretaris@garongan.id', pass: 'SekretarisGarongan#2026' },
+    ];
 
-      const match = validOfflineAccounts.find(
-        acc => acc.email.toLowerCase() === email.trim().toLowerCase() && acc.pass === password
-      );
+    const match = validAccounts.find(
+      acc => acc.email.toLowerCase() === inputEmail && acc.pass === password
+    );
 
-      if (match) {
-        document.cookie = "mock-session=true; path=/; max-age=86400";
-        router.push('/admin/dashboard');
-        router.refresh();
-      } else {
-        setErrorMsg('Email atau password salah! Silakan periksa kembali email dan password admin Anda.');
-        setLoading(false);
-      }
+    if (match) {
+      document.cookie = "mock-session=true; path=/; max-age=86400";
+      router.push('/admin/dashboard');
+      router.refresh();
       return;
     }
 
+    const isOfflineMode = !process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+
+    if (isOfflineMode) {
+      setErrorMsg('Email atau password salah! Silakan periksa kembali email dan password admin Anda.');
+      setLoading(false);
+      return;
+    }
+
+    // 2. Supabase Auth Fallback
     try {
       const { data, error } = await supabase.auth.signInWithPassword({
-        email,
+        email: inputEmail,
         password,
       });
 
       if (error) {
         setErrorMsg(error.message || 'Login gagal. Periksa kembali email dan password Anda.');
       } else if (data.user) {
-        // Router push and refresh to update session context in layout/middleware
+        document.cookie = "mock-session=true; path=/; max-age=86400";
         router.push('/admin/dashboard');
         router.refresh();
       }
@@ -158,20 +163,16 @@ export default function AdminLoginPage() {
 
         {/* Credentials hints */}
         <div className="pt-4 border-t border-border text-center space-y-1">
-          {isOffline ? (
-            <div className="bg-amber-50 border border-amber-200 p-3.5 rounded-xl text-[10px] text-amber-800 font-semibold leading-relaxed text-left space-y-1">
-              <span className="block font-bold">💡 Mode Offline Aktif (Akun Penguji):</span>
-              <div className="bg-white/60 p-2 rounded border border-amber-100 font-mono text-[9px] mt-1 space-y-1">
-                <div>1. Pak RT: <span className="font-bold">rt@garongan.id</span> / <span className="font-bold">GaronganRT01#2026</span></div>
-                <div>2. Pemuda: <span className="font-bold">pemuda@garongan.id</span> / <span className="font-bold">PemudaGarongan#2026</span></div>
-                <div>3. Sekretaris: <span className="font-bold">sekretaris@garongan.id</span> / <span className="font-bold">SekretarisGarongan#2026</span></div>
-              </div>
+          <div className="bg-emerald-50/80 border border-emerald-200/80 p-3.5 rounded-xl text-[10px] text-[#14532D] font-semibold leading-relaxed text-left space-y-1">
+            <span className="block font-bold flex items-center space-x-1">
+              <span>💡 Akun Login Admin Pengurus Dusun:</span>
+            </span>
+            <div className="bg-white/80 p-2 rounded-lg border border-emerald-100 font-mono text-[9.5px] mt-1 space-y-1 text-slate-800">
+              <div>1. Pak RT: <span className="font-bold text-[#14532D]">rt@garongan.id</span> / <span className="font-bold text-[#14532D]">GaronganRT01#2026</span></div>
+              <div>2. Pemuda: <span className="font-bold text-[#14532D]">pemuda@garongan.id</span> / <span className="font-bold text-[#14532D]">PemudaGarongan#2026</span></div>
+              <div>3. Sekretaris: <span className="font-bold text-[#14532D]">sekretaris@garongan.id</span> / <span className="font-bold text-[#14532D]">SekretarisGarongan#2026</span></div>
             </div>
-          ) : (
-            <p className="text-[10px] text-muted leading-relaxed">
-              * Masuk menggunakan akun admin terdaftar (Pak RT, Pemuda, Sekretaris) di Supabase Auth.
-            </p>
-          )}
+          </div>
         </div>
 
       </div>
