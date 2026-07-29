@@ -121,7 +121,7 @@ export default function AdminLoginPage() {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="admin@garongan.id"
+                placeholder="Masukkan alamat email admin..."
                 className="w-full pl-10 pr-4 py-3 rounded-xl border border-border text-xs focus:ring-1 focus:ring-primary focus:border-primary outline-none transition-all"
               />
             </div>
@@ -160,20 +160,6 @@ export default function AdminLoginPage() {
             )}
           </button>
         </form>
-
-        {/* Credentials hints */}
-        <div className="pt-4 border-t border-border text-center space-y-1">
-          <div className="bg-emerald-50/80 border border-emerald-200/80 p-3.5 rounded-xl text-[10px] text-[#14532D] font-semibold leading-relaxed text-left space-y-1">
-            <span className="block font-bold flex items-center space-x-1">
-              <span>💡 Akun Login Admin Pengurus Dusun:</span>
-            </span>
-            <div className="bg-white/80 p-2 rounded-lg border border-emerald-100 font-mono text-[9.5px] mt-1 space-y-1 text-slate-800">
-              <div>1. Pak RT: <span className="font-bold text-[#14532D]">rt@garongan.id</span> / <span className="font-bold text-[#14532D]">GaronganRT01#2026</span></div>
-              <div>2. Pemuda: <span className="font-bold text-[#14532D]">pemuda@garongan.id</span> / <span className="font-bold text-[#14532D]">PemudaGarongan#2026</span></div>
-              <div>3. Sekretaris: <span className="font-bold text-[#14532D]">sekretaris@garongan.id</span> / <span className="font-bold text-[#14532D]">SekretarisGarongan#2026</span></div>
-            </div>
-          </div>
-        </div>
 
       </div>
     </div>
